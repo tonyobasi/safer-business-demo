@@ -1,0 +1,82 @@
+[
+  {
+    "section": "V3 Business image gallery",
+    "asset": "craft",
+    "frame": [
+      64.0,
+      1260.0,
+      416.0,
+      277.0
+    ]
+  },
+  {
+    "section": "V3 Business image gallery",
+    "asset": "boutique",
+    "frame": [
+      512.0,
+      1260.0,
+      416.0,
+      277.0
+    ]
+  },
+  {
+    "section": "V3 Business image gallery",
+    "asset": "entrepreneur",
+    "frame": [
+      736.0,
+      1676.0,
+      640.0,
+      280.0
+    ]
+  },
+  {
+    "section": "V3 Payments terracotta",
+    "asset": "payment",
+    "frame": [
+      64.0,
+      2196.0,
+      628.0,
+      419.0
+    ]
+  },
+  {
+    "section": "V3 Stock blue section",
+    "asset": "stock",
+    "frame": [
+      748.0,
+      2884.0,
+      628.0,
+      419.0
+    ]
+  },
+  {
+    "section": "V3 Delivery charcoal section",
+    "asset": "delivery1",
+    "frame": [
+      64.0,
+      3510.0,
+      395.0,
+      385.0
+    ]
+  },
+  {
+    "section": "V3 Delivery charcoal section",
+    "asset": "delivery2",
+    "frame": [
+      483.0,
+      3610.0,
+      235.0,
+      300.0
+    ]
+  },
+  {
+    "section": "V3 Closing photo section",
+    "asset": "closing",
+    "frame": [
+      964.0,
+      4970.0,
+      412.0,
+      350.0
+    ]
+  }
+]

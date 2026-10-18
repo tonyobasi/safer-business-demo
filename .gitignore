@@ -1,0 +1,27 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.ppk
+id_rsa*
+id_ed25519*
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Large design exports; keep source code and design notes in Git
+/designs/*.svg
+/designs/*.png
+/designs/*.jpg
+/designs/*.jpeg

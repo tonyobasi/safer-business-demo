@@ -1,0 +1,28 @@
+{
+  "fileKey": "qd7RjWOQwVGlmcjt7pjFbp",
+  "desktop": {
+    "id": "149:4839",
+    "name": "Landing page \u00b7 Desktop \u00b7 African businesses",
+    "x": 8200,
+    "y": -387
+  },
+  "mobile": {
+    "id": "149:5094",
+    "name": "Landing page \u00b7 Mobile \u00b7 African businesses",
+    "x": 10600,
+    "y": -387
+  },
+  "colors": {
+    "hero": "#FFFFFF",
+    "heroContainer": "#083B26",
+    "gallery": "#DDE7F0",
+    "payments": "#BF6244",
+    "stock": "#F6F6F6",
+    "delivery": "#24262B",
+    "workspace": "#FBFBFB",
+    "closing": "#EDC2A2"
+  },
+  "photoAudit": "landing-unique-photo-audit.json",
+  "sources": "landing-african-photo-credits.md",
+  "notes": "Current frames replaced in their existing positions; temporary import frames removed. User desktop colours retained and matched on mobile."
+}

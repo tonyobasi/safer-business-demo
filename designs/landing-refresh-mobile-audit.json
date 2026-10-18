@@ -1,0 +1,72 @@
+[
+  {
+    "section": "V3 Mobile business gallery",
+    "asset": "craft",
+    "frame": [
+      24.0,
+      1302.0,
+      342.0,
+      228.0
+    ]
+  },
+  {
+    "section": "V3 Mobile business gallery",
+    "asset": "boutique",
+    "frame": [
+      24.0,
+      1632.0,
+      342.0,
+      228.0
+    ]
+  },
+  {
+    "section": "V3 Mobile business gallery",
+    "asset": "entrepreneur",
+    "frame": [
+      24.0,
+      2622.0,
+      342.0,
+      228.0
+    ]
+  },
+  {
+    "section": "V3 Mobile payments terracotta",
+    "asset": "payment",
+    "frame": [
+      24.0,
+      3088.0,
+      342.0,
+      228.0
+    ]
+  },
+  {
+    "section": "V3 Mobile stock blue",
+    "asset": "stock",
+    "frame": [
+      24.0,
+      3900.0,
+      342.0,
+      228.0
+    ]
+  },
+  {
+    "section": "V3 Mobile delivery charcoal",
+    "asset": "delivery1",
+    "frame": [
+      24.0,
+      4640.0,
+      342.0,
+      228.0
+    ]
+  },
+  {
+    "section": "V3 Mobile closing photo",
+    "asset": "closing",
+    "frame": [
+      24.0,
+      5950.0,
+      342.0,
+      228.0
+    ]
+  }
+]

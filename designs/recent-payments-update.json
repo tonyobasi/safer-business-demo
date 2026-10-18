@@ -1,0 +1,36 @@
+{
+  "fileKey": "qd7RjWOQwVGlmcjt7pjFbp",
+  "change": "Recent conversations changed to recent payments in agentic screens",
+  "headings": {
+    "RECENT CONVERSATIONS": "RECENT PAYMENTS",
+    "Recent conversations": "Recent payments"
+  },
+  "rows": [
+    {
+      "previous": "Payment link for a linen set",
+      "current": "₦85,000 · Amina Yusuf",
+      "count": 16
+    },
+    {
+      "previous": "This week’s bestsellers",
+      "current": "$120 · Daniel James",
+      "count": 16
+    },
+    {
+      "previous": "Delivery to Lekki",
+      "current": "₦42,500 · Tola Ade",
+      "count": 15
+    },
+    {
+      "previous": "Update silk scarf stock",
+      "current": "₦18,000 · Chioma Obi",
+      "count": 15
+    }
+  ],
+  "notes": [
+    "Amounts and names are illustrative design content.",
+    "Existing Today/Yesterday metadata retained.",
+    "Desktop and mobile delivery-detail headings remain Delivery to Lekki.",
+    "Native text edits preserve existing layout and styles."
+  ]
+}

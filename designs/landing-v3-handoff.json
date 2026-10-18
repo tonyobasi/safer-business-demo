@@ -1,0 +1,41 @@
+{
+  "fileKey": "qd7RjWOQwVGlmcjt7pjFbp",
+  "desktop": {
+    "nodeId": "136:3218",
+    "width": 1440,
+    "height": 5660,
+    "x": 8200,
+    "y": -387
+  },
+  "mobile": {
+    "nodeId": "137:3424",
+    "width": 390,
+    "height": 6640,
+    "x": 9840,
+    "y": -387
+  },
+  "font": "Kanit; Bold headlines, Medium and Regular supporting text",
+  "palette": {
+    "cream": "#F7F2E9",
+    "galleryBlue": "#DDE7F0",
+    "terracotta": "#BF6244",
+    "stockBlue": "#E7EBF7",
+    "charcoal": "#24262B",
+    "apricot": "#EDC2A2"
+  },
+  "businessTypes": [
+    "Makers and independent brands",
+    "Shops, cafés and hospitality",
+    "Online retailers",
+    "Wholesalers and distributors",
+    "Established businesses"
+  ],
+  "photographs": [
+    "Anna Shvets / Pexels 5761122",
+    "RDNE Stock project / Pexels 10375816",
+    "Kampus Production / Pexels 7857532",
+    "cottonbro studio / Pexels 7018655",
+    "Alena Darmel / Pexels 7710178"
+  ],
+  "note": "Business type illustrations, not customer endorsements. Previous versions preserved."
+}

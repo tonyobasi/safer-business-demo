@@ -1,0 +1,30 @@
+{
+  "name": "safer-business",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @safer/web -- --host 127.0.0.1",
+    "build": "npm run build -w @safer/web",
+    "typecheck": "npm run typecheck -w @safer/web",
+    "test": "npm run test -w @safer/web",
+    "check": "npm run typecheck && npm test && npm run build",
+    "format": "prettier --write \"apps/web/src/**/*.{ts,tsx,css}\" \"packages/contracts/src/**/*.ts\" \"*.json\" \"apps/web/*.json\" \"apps/web/*.ts\"",
+    "format:check": "prettier --check \"apps/web/src/**/*.{ts,tsx,css}\" \"packages/contracts/src/**/*.ts\"",
+    "preview": "npm run preview -w @safer/web -- --host 127.0.0.1"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "apps/web/public"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10"
+  }
+}

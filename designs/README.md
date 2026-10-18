@@ -1,0 +1,17 @@
+# Safer Business UI concept
+
+Visual mockup generated with the built-in image generation tool. Controls and payments are illustrative.
+
+Includes AI shopping, cart and payment review, Stellar wallet connection, signup with Google and buyer/merchant role selection, and a merchant workspace with products, orders, USDC and naira balances, and profile navigation.
+
+## Generation prompt
+
+Use case: ui-mockup.
+Create a polished high-fidelity UI design presentation for "Safer Business", an AI-powered marketplace for Nigerian buyers and merchants. Landscape 3:2 high-resolution board. Three distinct flat app screens arranged on a very pale gray canvas: one large desktop marketplace screen occupying the upper two thirds, two smaller companion screens below showing signup and merchant dashboard. Precise readable typography, contemporary sans serif, generous whitespace, warm white surfaces, emerald green brand and charcoal type, thin gray borders, restrained rounded corners. No device frames, no perspective, no decorative 3D.
+
+Main desktop buyer screen: top bar logo small emerald abstract S icon and "Safer Business", subtle "Marketplace" tag, right "Cart 2" and avatar "Ada". Slim left rail with icons and labels "New chat", "Discover", "My orders", "Saved", bottom "Profile". Large central AI conversation, header "Your next great find starts here." subline "Discover, compare and shop with your AI assistant." User bubble "Find wireless headphones under ₦100,000". Assistant message "Here are three great picks from verified merchants." Three attractive product cards with realistic product thumbnails of black over-ear headphones, cream headphones and white earbuds, product names, merchant verified badges, clear naira prices and smaller USDC prices, each with "Add to cart". Below an inline order summary for one selected product with "Review & pay" emerald button, payment options "Naira" and "USDC", clear text "Confirm before payment". Anchored rounded composer "Ask about products, delivery or your order..." with plus icon and green send arrow. Right sidebar is essential, clearly delineated, header "Your workspace", buyer mode badge, links "Browse products", "Cart", "Orders", "Profile"; wallet panel "Stellar wallet", outlined button "Connect wallet"; small cart preview with 2 items and total. Main screen should feel like a real functional chat shopping interface.
+
+Lower left companion screen signup: brand "Safer Business", heading "Your next chapter starts here", two role cards "I'm a buyer" and "I'm a merchant" with merchant selected in green; "Continue with Google" button with recognizable G, divider "or", inputs "Full name", "Email", "Password", green "Create account" button, footer "Already have an account? Sign in". Show role selection clearly.
+
+Lower right companion screen merchant dashboard: heading "Good morning, Ada", "Merchant workspace", compact main area showing "Balance" two distinct cards "USDC 1,240.50" and "₦850,000", both separately labeled not exchange equivalents. "Recent orders" table with product, status paid/processing and amount. Small "Products" section with "Add product" and "Edit" controls. Right navigation with "View products", "Update products", "Orders", "Balance", "Profile" and wallet button "Connect Stellar wallet". Visually coherent with main screen. Small discreet board labels "01 / AI shopping", "02 / Signup", "03 / Merchant workspace". Prioritize legibility and clean hierarchy. Do not add code, marketing webpage sections, or explanatory paragraphs outside the screens.
+

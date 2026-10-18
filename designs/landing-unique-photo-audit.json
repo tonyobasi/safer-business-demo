@@ -1,0 +1,116 @@
+{
+  "desktop": {
+    "photoCount": 13,
+    "distinctPhotos": 13,
+    "crossSectionDuplicates": {},
+    "photos": [
+      {
+        "section": "V3 Hero business collage",
+        "hash": "9aba967a46871d0f"
+      },
+      {
+        "section": "V3 Hero business collage",
+        "hash": "a1ed33b9688a7c21"
+      },
+      {
+        "section": "V3 Hero business collage",
+        "hash": "622176ab7228f5eb"
+      },
+      {
+        "section": "V3 Business image gallery",
+        "hash": "bd350518576e8915"
+      },
+      {
+        "section": "V3 Business image gallery",
+        "hash": "05c57d388e126d21"
+      },
+      {
+        "section": "V3 Business image gallery",
+        "hash": "97ba9d192bb10b72"
+      },
+      {
+        "section": "V3 Business image gallery",
+        "hash": "00a0cb7d20d4025d"
+      },
+      {
+        "section": "V3 Business image gallery",
+        "hash": "dc4a7937134e7ef0"
+      },
+      {
+        "section": "V3 Payments terracotta",
+        "hash": "5790e523bfb1c1e6"
+      },
+      {
+        "section": "V3 Stock blue section",
+        "hash": "120126b71aed3a7d"
+      },
+      {
+        "section": "V3 Delivery charcoal section",
+        "hash": "72beada1fb9ed87f"
+      },
+      {
+        "section": "V3 Delivery charcoal section",
+        "hash": "a3e1fa4a96d8dff0"
+      },
+      {
+        "section": "V3 Closing photo section",
+        "hash": "31ebeb553822fe3d"
+      }
+    ]
+  },
+  "mobile": {
+    "photoCount": 12,
+    "distinctPhotos": 12,
+    "crossSectionDuplicates": {},
+    "photos": [
+      {
+        "section": "V3 Mobile hero collage",
+        "hash": "9aba967a46871d0f"
+      },
+      {
+        "section": "V3 Mobile hero collage",
+        "hash": "a1ed33b9688a7c21"
+      },
+      {
+        "section": "V3 Mobile hero collage",
+        "hash": "622176ab7228f5eb"
+      },
+      {
+        "section": "V3 Mobile business gallery",
+        "hash": "bd350518576e8915"
+      },
+      {
+        "section": "V3 Mobile business gallery",
+        "hash": "05c57d388e126d21"
+      },
+      {
+        "section": "V3 Mobile business gallery",
+        "hash": "97ba9d192bb10b72"
+      },
+      {
+        "section": "V3 Mobile business gallery",
+        "hash": "00a0cb7d20d4025d"
+      },
+      {
+        "section": "V3 Mobile business gallery",
+        "hash": "dc4a7937134e7ef0"
+      },
+      {
+        "section": "V3 Mobile payments terracotta",
+        "hash": "5790e523bfb1c1e6"
+      },
+      {
+        "section": "V3 Mobile stock blue",
+        "hash": "120126b71aed3a7d"
+      },
+      {
+        "section": "V3 Mobile delivery charcoal",
+        "hash": "72beada1fb9ed87f"
+      },
+      {
+        "section": "V3 Mobile closing photo",
+        "hash": "31ebeb553822fe3d"
+      }
+    ]
+  }
+}

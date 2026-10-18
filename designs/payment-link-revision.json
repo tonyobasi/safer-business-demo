@@ -1,0 +1,47 @@
+{
+  "fileKey": "qd7RjWOQwVGlmcjt7pjFbp",
+  "screens": [
+    {
+      "name": "Generated NGN payment link · Mobile",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=88-2815&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "generated-ngn-link-mobile-review.jpg"
+    },
+    {
+      "name": "Generated USD payment link · Mobile",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=80-29&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "generated-usd-link-mobile-review.jpg"
+    },
+    {
+      "name": "USD customer payment · Mobile",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=88-3085&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "usd-customer-payment-mobile-review.jpg"
+    },
+    {
+      "name": "Generated USD payment link · Desktop",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=80-28&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "generated-usd-link-review.jpg"
+    },
+    {
+      "name": "Generated NGN payment link · Desktop",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=88-2783&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "generated-ngn-link-review.jpg"
+    },
+    {
+      "name": "USD customer payment · Desktop",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=88-3053&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "usd-customer-payment-review.jpg"
+    }
+  ],
+  "changes": [
+    "Replaced both Stellar connection screens with generated USD payment-link screens",
+    "Removed visible Stellar and connection references from settings",
+    "Added separate desktop and mobile generated NGN links",
+    "Added desktop and mobile USD customer checkout with US virtual account and USDC wallet choices",
+    "Renamed obsolete connection containers and shortened status badges"
+  ],
+  "validation": [
+    "Full-file Find returned no Stellar results",
+    "Desktop and mobile payment-link variants visually checked",
+    "Desktop and mobile USD checkout visually checked"
+  ]
+}

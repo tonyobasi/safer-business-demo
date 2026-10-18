@@ -1,0 +1,37 @@
+{
+  "fileKey": "qd7RjWOQwVGlmcjt7pjFbp",
+  "font": "Kanit",
+  "updated": [
+    "Shared Heading style — Kanit Regular",
+    "Shared Title style — Kanit Medium",
+    "Shared Value style — Kanit SemiBold",
+    "Matching original desktop onboarding headings",
+    "Matching original mobile onboarding headings",
+    "Large onboarding brand statement",
+    "Original workspace welcome headings",
+    "Matching original brand and prominent balance/payment amount text"
+  ],
+  "preserved": "Inter body, label and caption styles",
+  "reviews": [
+    {
+      "screen": "Sign up · Desktop",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=68-17626&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "kanit-signup-desktop-review.jpg"
+    },
+    {
+      "screen": "Sign up · Mobile",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=68-17705&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "kanit-signup-mobile-review.jpg"
+    },
+    {
+      "screen": "Generated USD payment link · Desktop",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=80-28&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "kanit-usd-link-desktop-review.jpg"
+    },
+    {
+      "screen": "USD customer payment · Mobile",
+      "url": "https://www.figma.com/design/qd7RjWOQwVGlmcjt7pjFbp/Draft?node-id=88-3085&t=KBvz7eTOdMq3FdNg-0",
+      "screenshot": "kanit-usd-checkout-mobile-review.jpg"
+    }
+  ]
+}

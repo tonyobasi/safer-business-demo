@@ -1,0 +1,25 @@
+{
+  "fileKey": "qd7RjWOQwVGlmcjt7pjFbp",
+  "desktop": {
+    "nodeId": "131:2935",
+    "x": 5800,
+    "y": -387,
+    "width": 1440,
+    "height": 4080
+  },
+  "mobile": {
+    "nodeId": "131:3088",
+    "x": 7400,
+    "y": -387,
+    "width": 390,
+    "height": 5090
+  },
+  "reference": "https://openai.com/",
+  "direction": "White conversation-first hero, restrained navigation, editorial product panels, generous spacing, Kanit type.",
+  "preserved": "Prior landing pages remain. Exact exported user-updated workspace preview and Anna Shvets Pexels photo used in revised design.",
+  "photoCredit": "https://www.pexels.com/photo/delighted-black-woman-standing-at-table-in-workshop-for-making-candles-5761122/",
+  "sourceFiles": [
+    "safer-business-landing-v2-desktop.svg",
+    "safer-business-landing-v2-mobile.svg"
+  ]
+}
