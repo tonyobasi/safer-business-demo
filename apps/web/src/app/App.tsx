@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
-import { createBrowserRouter, Link, RouterProvider, useLocation } from 'react-router-dom';
+import { createBrowserRouter, Link, Navigate, RouterProvider, useLocation } from 'react-router-dom';
 import { WorkspaceShell } from '../components/WorkspaceShell';
 import { Button, ErrorState, Loading, ToastProvider } from '../components/ui';
 import {
@@ -11,11 +11,11 @@ import {
   Signup,
   Verify,
 } from '../features/auth/Auth';
-import { RequireSession, SessionProvider } from './session';
+import { RequireSession, SessionProvider, useSession } from './session';
+import { isDemo } from '../lib/api';
 const LinkDetails = lazy(() => import('../features/payments/LinkDetails'));
 const PaymentDetails = lazy(() => import('../features/payments/PaymentDetails'));
 const TrackDelivery = lazy(() => import('../features/deliveries/TrackDelivery'));
-const Landing = lazy(() => import('../features/landing/Landing'));
 const Agent = lazy(() => import('../features/agent/Agent'));
 const Catalogue = lazy(() => import('../features/catalogue/Catalogue'));
 const Payments = lazy(() => import('../features/payments/Payments'));
@@ -24,6 +24,14 @@ const Deliveries = lazy(() => import('../features/deliveries/Deliveries'));
 const Profile = lazy(() => import('../features/profile/Profile'));
 const Settings = lazy(() => import('../features/settings/Settings'));
 const Checkout = lazy(() => import('../features/payments/Checkout'));
+function DemoEntry() {
+  const { session, login } = useSession();
+  useEffect(() => {
+    if (isDemo && !session) login('demo@safer.example');
+  }, [session, login]);
+  if (!isDemo) return <Navigate to="/login" replace />;
+  return session ? <Navigate to="/app" replace /> : <Loading />;
+}
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 15000, retry: 1, refetchOnWindowFocus: true } },
 });
@@ -78,7 +86,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <Root>
-        <Landing />
+        <DemoEntry />
       </Root>
     ),
   },

@@ -92,6 +92,7 @@ export function AuthLayout({
   );
 }
 export function Signup() {
+  const { login } = useSession();
   const [method, setMethod] = useState<'email' | 'phone'>('email');
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
@@ -121,6 +122,20 @@ export function Signup() {
       <p className="eyebrow">Your next chapter starts here</p>
       <h2>Make room for more business.</h2>
       <p>Create your merchant account. Let’s give your business a simpler way to grow.</p>
+      <Button
+        className="full-width auth-demo-entry"
+        onClick={() => {
+          login('demo@safer.example');
+          navigate('/app');
+        }}
+      >
+        Login to demo
+      </Button>
+      <div className="auth-or">
+        <span />
+        or create an account
+        <span />
+      </div>
       <form onSubmit={submit}>
         <label htmlFor="signup-country">Country</label>
         <div className="signup-country-field">
@@ -456,6 +471,14 @@ export function Login() {
       <p className="eyebrow">Good to have you back</p>
       <h2>Your business awaits.</h2>
       <p>Sign in to pick up where you left off.</p>
+      <Button type="button" className="full-width auth-demo-entry" onClick={demo}>
+        Login to demo
+      </Button>
+      <div className="auth-or">
+        <span />
+        or sign in
+        <span />
+      </div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -497,14 +520,6 @@ export function Login() {
           </p>
         )}
         <Button className="full-width">Sign in</Button>
-        <div className="auth-or">
-          <span />
-          or explore first
-          <span />
-        </div>
-        <Button type="button" className="full-width" variant="secondary" onClick={demo}>
-          Open demo workspace
-        </Button>
         <p className="auth-caption">
           New here? <Link to="/signup">Create a merchant account</Link>
         </p>

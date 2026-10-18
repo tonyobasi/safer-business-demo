@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite (normally http://127.0.0.1:5173). Select **Sign in → Open demo workspace**, or complete onboarding with a sample email/phone, verification code **123456**, and a sample password. Passwords are never stored.
+Open the local URL printed by Vite (normally http://127.0.0.1:5173). The root URL opens the demo dashboard automatically. Login and signup also include a prominent **Login to demo** button. You can still complete onboarding with a sample email/phone, verification code **123456**, and a sample password. Passwords are never stored.
 
 ```sh
 npm run check       # TypeScript, tests, production build
@@ -20,7 +20,7 @@ npm run build      # Output: apps/web/dist
 
 ## Implemented frontend
 
-- Responsive landing page with Kanit headings, supplied logo, current section colours and African business photographs.
+- Direct demo dashboard entry with Kanit headings, supplied logo and glossy workspace screens. Landing source is retained but is not routed.
 - Nigeria-only country selection with flag/+234, email/phone signup, OTP validation/expiry/resend, password setup, business setup, login and password-recovery views.
 - Responsive merchant shell with glossy Recent payments, USD/NGN balances and demo EUR/GBP wallets, business navigation and a mobile menu.
 - Demo assistant with payment-link, stock, payment and delivery cards; explicit action review, cancellation and retry.
@@ -46,7 +46,7 @@ The landing workspace illustration is built from HTML/components rather than a s
 
 ## Deployment
 
-The build can be served as a static SPA over HTTPS. Configure your host to rewrite unknown application routes to `/index.html`, while serving `/images`, `/assets` and `/mockServiceWorker.js` normally. No deployment has been made. Landing-page HTML is client rendered in this milestone; prerender/SSR remains required before an SEO-focused public launch.
+The build can be served as a static SPA over HTTPS. Configure your host to rewrite unknown application routes to `/index.html`, while serving `/images`, `/assets` and `/mockServiceWorker.js` normally. The GitHub repository is connected to Vercel at https://safer-business-demo.vercel.app. The root `vercel.json` configures the frontend build output and SPA routing.
 
 Do not enable real payment collection until the backend integration and release gates in `IMPLEMENTATION_PLAN.md` are complete.
 

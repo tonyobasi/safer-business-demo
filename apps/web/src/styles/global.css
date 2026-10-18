@@ -6115,3 +6115,12 @@ tbody tr:hover {
 .signup-contact-field {
   display: block;
 }
+
+.auth-form-card .auth-demo-entry {
+  min-height: 54px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-top: 22px;
+  box-shadow: 0 5px 15px #00000018;
+}
