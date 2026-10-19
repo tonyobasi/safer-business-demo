@@ -1,0 +1,447 @@
+/*
+ * Glossy theme layer. Loaded after global.css so it can restyle shared surfaces
+ * without rewriting the base rules. Charcoal stays the primary brand colour;
+ * iris (blue-violet) is the secondary accent for highlights, focus and calls to action.
+ */
+:root {
+  --ink: #14161a;
+  --accent: #6a5cff;
+  --accent-strong: #4f3fe6;
+  --accent-violet: #a066ff;
+  --accent-sky: #4cc3ff;
+  --accent-soft: #efedff;
+  --accent-tint: #6a5cff1f;
+  --accent-gradient: linear-gradient(135deg, #8a7dff 0%, #6a5cff 45%, #4f3fe6 100%);
+  --ink-gradient: linear-gradient(160deg, #3a3e46 0%, #1b1d22 55%, #0c0d10 100%);
+  --glass: #ffffffb8;
+  --glass-strong: #ffffffe0;
+  --glass-edge: #ffffffcc;
+  --line: #e6e7f0;
+  --sheen: inset 0 1px 0 #ffffffd9;
+  --shadow-soft: 0 10px 30px -18px #1f1d4d40, 0 2px 6px -2px #1f1d4d0f;
+  --shadow-lift: 0 18px 40px -20px #1f1d4d59, 0 4px 10px -4px #1f1d4d14;
+  --shadow-accent: 0 10px 24px -10px #5b4cf599;
+  --mesh:
+    radial-gradient(900px 560px at 30% -12%, #dcd6ff 0%, #dcd6ff00 62%),
+    radial-gradient(760px 560px at 100% 0%, #d6efff 0%, #d6efff00 58%),
+    radial-gradient(900px 640px at 55% 112%, #ecdcff 0%, #ecdcff00 62%), #f2f3f9;
+  accent-color: var(--accent);
+}
+::selection {
+  background: #6a5cff33;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c9cbe0 transparent;
+}
+a {
+  transition: color 0.16s;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-tint);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.eyebrow,
+.page-heading .eyebrow,
+.agent-welcome > .eyebrow {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+.text-button,
+.subtle-link {
+  color: var(--accent-strong);
+}
+.primary-link,
+.pill-button {
+  background: var(--ink-gradient);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+
+/* Workspace canvas: one soft mesh with frosted panels floating above it. */
+.workspace-shell {
+  background: var(--mesh);
+  background-attachment: fixed;
+}
+.app-header {
+  position: relative;
+  z-index: 5;
+  background: #ffffffa6;
+  backdrop-filter: saturate(1.6) blur(18px);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  border-bottom: 1px solid #ffffffb3;
+  box-shadow: 0 1px 0 #1f1d4d0d;
+}
+.app-header .brand img {
+  box-shadow: 0 6px 14px -6px #1f1d4d66;
+}
+.workspace-health {
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: #ffffffb3;
+  border: 1px solid #fff;
+  box-shadow: var(--shadow-soft);
+  color: #5d6270;
+}
+.workspace-health i {
+  width: 6px;
+  height: 6px;
+  background: #22c38e;
+  box-shadow: 0 0 0 3px #22c38e2e;
+}
+.app-header .avatar,
+.avatar {
+  background: linear-gradient(135deg, #f3f1ff, #e3e7ff);
+  color: var(--accent-strong);
+  box-shadow:
+    var(--sheen),
+    0 0 0 1px #6a5cff1f;
+}
+.recent-sidebar,
+.business-sidebar {
+  background: #ffffff6b;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: #ffffffb3;
+}
+.app-main,
+.agent-page,
+.catalogue-page,
+.payments-page,
+.settings-page,
+.profile-page {
+  background: transparent;
+}
+
+/* Navigation */
+.workspace-home-link {
+  background: var(--ink-gradient);
+  box-shadow:
+    var(--sheen),
+    0 10px 22px -12px #14161acc;
+}
+.workspace-home-link:hover,
+.workspace-home-link.active {
+  background: var(--ink-gradient);
+  box-shadow:
+    var(--sheen),
+    0 0 0 1px #6a5cff40,
+    0 12px 26px -12px #4f3fe6aa;
+}
+.workspace-home-link svg {
+  color: #b8b0ff;
+}
+.business-nav a {
+  position: relative;
+  transition:
+    background 0.18s,
+    color 0.18s;
+}
+.business-nav a:hover {
+  background: #ffffffb3;
+}
+.business-nav a.active {
+  background: linear-gradient(120deg, #ffffff, #f1efff);
+  color: var(--accent-strong);
+  font-weight: 600;
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+.business-nav a.active::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--accent-gradient);
+}
+.business-nav a.active > svg:last-child {
+  color: var(--accent);
+}
+.recent-payments-heading > a {
+  color: var(--accent-strong);
+}
+.quick-actions > a > span {
+  border: 1px solid #fff;
+  background: linear-gradient(145deg, #fff, #f2f1fb);
+  box-shadow: var(--sheen), var(--shadow-soft);
+  color: var(--accent-strong);
+  transition:
+    transform 0.18s,
+    box-shadow 0.18s;
+}
+.quick-actions > a:hover > span {
+  transform: translateY(-2px);
+  box-shadow: var(--sheen), var(--shadow-lift);
+}
+
+/* Glass cards */
+.card,
+.summary-card,
+.help-card {
+  border-color: var(--glass-edge);
+  background: linear-gradient(150deg, var(--glass-strong), var(--glass));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+.recent-sidebar .recent-payment-cards .recent-payment-card {
+  border-color: #fffffff2;
+  background: linear-gradient(145deg, #ffffff 0%, #ffffffd6 50%, #f1f0fb 100%);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+.recent-sidebar .recent-payment-cards .recent-payment-card:hover {
+  background: linear-gradient(145deg, #ffffff, #efedff);
+  box-shadow: var(--sheen), var(--shadow-lift);
+}
+.recent-sidebar .recent-payment-top .payment-currency-mark,
+.payment-feed-avatar {
+  background: var(--ink-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    0 4px 10px -4px #14161a66;
+}
+.payment-feed-avatar {
+  background: var(--accent-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff59,
+    var(--shadow-accent);
+}
+
+/* Balance cards: a deep glossy ink card and a frosted companion. */
+.balance-card {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #fff;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #ffffffeb, #ffffffb3);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+.balance-dark,
+.payments-page .balance-horizontal .balance-dark {
+  border-color: #ffffff1f;
+  background:
+    radial-gradient(80% 110% at 100% 0%, #7a6cffcc 0%, #5a4cf066 35%, #5a4cf000 70%),
+    radial-gradient(70% 90% at 0% 100%, #4cc3ff4d 0%, #4cc3ff00 65%),
+    linear-gradient(150deg, #2b2e36 0%, #15161b 55%, #0b0b0e 100%);
+  box-shadow:
+    inset 0 1px 0 #ffffff33,
+    0 22px 40px -22px #2a1fa8cc,
+    0 6px 14px -6px #0006;
+}
+.balance-dark::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 45% 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #ffffff1c, #ffffff00);
+}
+.balance-dark > small,
+.balance-dark .pending span:first-child {
+  color: #b9b6dc;
+}
+.create-wallet-button,
+.payments-page .balance-horizontal .create-wallet-button {
+  border-color: #fff;
+  background: linear-gradient(150deg, #fff, #f4f3ff);
+  color: var(--accent-strong);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+
+/* Assistant */
+.agent-page .agent-topline {
+  background: transparent;
+}
+.agent-page .agent-welcome h1 {
+  background: linear-gradient(100deg, #14161a 0%, #2b2a4a 45%, #5446f0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.agent-page .prompt-card {
+  border-color: #fffffff2;
+  background: linear-gradient(145deg, #ffffffeb, #ffffffa8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+.agent-page .prompt-card:hover {
+  background: linear-gradient(145deg, #ffffff, #f3f1ff);
+  border-color: #fff;
+  box-shadow:
+    var(--sheen),
+    0 0 0 1px #6a5cff2e,
+    var(--shadow-lift);
+}
+.agent-page .prompt-card > svg {
+  background: var(--accent-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff66,
+    var(--shadow-accent);
+}
+.agent-page .prompt-card:nth-child(even) > svg {
+  background: var(--ink-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    0 8px 18px -8px #14161a88;
+}
+.agent-page .prompt-card small {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+.agent-page .composer-wrap {
+  background: transparent;
+}
+.agent-page .composer {
+  border-color: #fff;
+  background: linear-gradient(150deg, #ffffffeb, #ffffffc2);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: var(--sheen), var(--shadow-lift);
+}
+.agent-page .composer:focus-within {
+  box-shadow:
+    var(--sheen),
+    0 0 0 4px var(--accent-tint),
+    var(--shadow-lift);
+}
+.send-button {
+  background: var(--accent-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff59,
+    var(--shadow-accent);
+  transition:
+    transform 0.16s,
+    opacity 0.16s;
+}
+.send-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+.send-button:disabled {
+  opacity: 0.35;
+  box-shadow: none;
+}
+.agent-page .message-user {
+  border-color: #ffffff33;
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 #ffffff40,
+    var(--shadow-accent);
+}
+.agent-page .agent-card {
+  background: linear-gradient(150deg, #ffffffeb, #ffffffbd);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--sheen), var(--shadow-soft);
+}
+
+/* Status, toggles and selections */
+.badge-success,
+.payment-state {
+  background: #e3f7ef;
+  color: #18734f;
+}
+.payment-state i {
+  background: #22c38e;
+}
+.segmented button.selected,
+.wallet-currency-option.selected {
+  background: var(--ink-gradient);
+  box-shadow:
+    var(--sheen),
+    0 0 0 1px #6a5cff40,
+    0 10px 20px -12px #4f3fe6aa;
+}
+.settings-page .toggle-row input:checked {
+  background: var(--accent-gradient);
+}
+.settings-section-title > span {
+  background: var(--accent-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff59,
+    var(--shadow-accent);
+}
+.settings-page .settings-form,
+.settings-page .toggle-row {
+  border-color: #fff;
+  background: linear-gradient(150deg, #ffffffeb, #ffffffb8);
+}
+.dialog {
+  border: 1px solid #fff;
+  background: linear-gradient(150deg, #ffffff, #f6f5ff);
+  box-shadow:
+    var(--sheen),
+    0 30px 80px -30px #1f1d4d80;
+}
+
+/* Sign-in and sign-up: charcoal canvas lit by an iris aurora. */
+.auth-layout,
+.auth-layout-signin .auth-story {
+  background:
+    radial-gradient(60% 55% at 12% 8%, #5a4cf04d 0%, #5a4cf000 70%),
+    radial-gradient(45% 50% at 92% 95%, #4cc3ff2e 0%, #4cc3ff00 70%),
+    radial-gradient(40% 40% at 70% 20%, #a066ff26 0%, #a066ff00 70%),
+    linear-gradient(140deg, #16171d 0%, #0b0b10 55%, #050507 100%);
+}
+.auth-layout-signin .auth-story {
+  background: transparent;
+}
+.auth-layout .auth-story h1 {
+  background: linear-gradient(100deg, #ffffff 0%, #ffffff 45%, #c4bcff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.auth-layout .auth-story .eyebrow {
+  color: #b3aaff;
+}
+.auth-layout .auth-form-card {
+  border: 1px solid #ffffff40;
+  background: linear-gradient(160deg, #ffffff 0%, #ffffffef 60%, #f4f2ffef 100%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 0 0 1px #6a5cff26,
+    0 30px 80px -30px #000c,
+    0 20px 60px -30px #5a4cf0aa;
+}
+.auth-form-card .auth-demo-entry {
+  background: var(--accent-gradient);
+  box-shadow:
+    inset 0 1px 0 #ffffff66,
+    0 14px 30px -14px #4f3fe6;
+}
+.auth-form-card .auth-demo-entry:hover {
+  background: linear-gradient(135deg, #9a8fff 0%, #7366ff 45%, #5546ee 100%);
+}
+
+@media (max-width: 700px) {
+  .mobile-bottom-nav {
+    border-top: 1px solid #ffffffb3;
+    background: #ffffffc2;
+    backdrop-filter: saturate(1.6) blur(18px);
+    -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  }
+  .mobile-bottom-nav a.active {
+    color: var(--accent-strong);
+    background: transparent;
+    font-weight: 600;
+  }
+  .mobile-bottom-nav a.active svg {
+    filter: drop-shadow(0 4px 8px #6a5cff66);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quick-actions > a:hover > span,
+  .send-button:not(:disabled):hover {
+    transform: none;
+  }
+}

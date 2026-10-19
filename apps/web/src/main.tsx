@@ -9,6 +9,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App, { queryClient } from './app/App';
 import './styles/global.css';
+import './styles/theme.css';
 async function start() {
   if (import.meta.env.VITE_DEMO_MODE !== 'false') {
     const { worker } = await import('./mocks/browser');
