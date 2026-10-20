@@ -1,4 +1,5 @@
 import type {
+  StaffInput,
   ProductInput,
   DeliveryInput,
   ItemInput,
@@ -10,7 +11,20 @@ import { repo } from './repository';
 
 /** Browser-local demo transport. Never sends a financial action to a live API. */
 export function demoApi(path: string, body: unknown, method: string, idempotency: string): unknown {
-  if (method === 'GET' && path === '/storefront') return repo.storefront();
+  if (method === 'POST' && path === '/staff') return repo.saveStaff(body as StaffInput);
+  const staff = path.match(/^\/staff\/([^/]+)$/);
+  if (method === 'PUT' && staff)
+    return repo.saveStaff(body as StaffInput, decodeURIComponent(staff[1]));
+  if (method === 'POST' && path === '/payroll') {
+    const input = body as { month: string; currency: StaffInput['currency'] };
+    return repo.createPayroll(input.month, input.currency);
+  }
+  const payroll = path.match(/^\/payroll\/([^/]+)\/(approve|pay|cancel)$/);
+  if (method === 'POST' && payroll)
+    return repo.advancePayroll(
+      decodeURIComponent(payroll[1]),
+      payroll[2] as 'approve' | 'pay' | 'cancel',
+    );
   if (method === 'POST' && path === '/products') return repo.saveProduct(body as ProductInput);
   const product = path.match(/^\/products\/([^/]+)$/);
   if (method === 'PUT' && product)

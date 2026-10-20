@@ -18,10 +18,10 @@ const PaymentDetails = lazy(() => import('../features/payments/PaymentDetails'))
 const TrackDelivery = lazy(() => import('../features/deliveries/TrackDelivery'));
 const Agent = lazy(() => import('../features/agent/Agent'));
 const Catalogue = lazy(() => import('../features/catalogue/ProductManager'));
-const Storefront = lazy(() => import('../features/store/Storefront'));
 const Payments = lazy(() => import('../features/payments/Payments'));
 const Links = lazy(() => import('../features/payments/PaymentLinks'));
 const Deliveries = lazy(() => import('../features/deliveries/Deliveries'));
+const Payroll = lazy(() => import('../features/payroll/Payroll'));
 const Profile = lazy(() => import('../features/profile/Profile'));
 const Settings = lazy(() => import('../features/settings/Settings'));
 const Checkout = lazy(() => import('../features/payments/Checkout'));
@@ -157,6 +157,7 @@ const router = createBrowserRouter([
       { path: 'payment-links/:id', element: <LinkDetails /> },
       { path: 'deliveries', element: <Deliveries /> },
       { path: 'deliveries/:id', element: <TrackDelivery /> },
+      { path: 'payroll', element: <Payroll /> },
       { path: 'profile', element: <Profile /> },
       { path: 'settings', element: <Settings /> },
     ],
@@ -166,14 +167,6 @@ const router = createBrowserRouter([
     element: (
       <Root>
         <Checkout />
-      </Root>
-    ),
-  },
-  {
-    path: '/store/demo',
-    element: (
-      <Root>
-        <Storefront />
       </Root>
     ),
   },

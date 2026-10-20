@@ -14,6 +14,7 @@ import {
   Sparkles,
   Truck,
   User,
+  Users,
   X,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -28,6 +29,7 @@ export const navigation = [
   { to: '/app/catalogue', label: 'Catalogue', icon: Package },
   { to: '/app/payments', label: 'Payments', icon: ReceiptText },
   { to: '/app/deliveries', label: 'Deliveries', icon: Truck },
+  { to: '/app/payroll', label: 'Staff & payroll', icon: Users },
   { to: '/app/profile', label: 'Profile', icon: User },
   { to: '/app/settings', label: 'Settings', icon: Settings },
 ];

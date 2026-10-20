@@ -1,7 +1,6 @@
 import type { Item } from '@safer/contracts';
-import { Eye, Package, Plus, Search, Store } from 'lucide-react';
+import { Package, Plus, Search, Store } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Badge, Button, Dialog, Empty, PageHeading } from '../../components/ui';
 import { useWorkspace } from '../../lib/api';
 import { money } from '../../lib/money';
@@ -28,8 +27,8 @@ export default function ProductManager() {
     <div className="page-content merchant-products">
       <PageHeading
         eyebrow="Your products. Ready for the world."
-        title="Products & storefront"
-        description="Build your collection, manage stock, and choose what customers see."
+        title="Your products"
+        description="Build your collection and manage your product details and stock."
         action={
           <Button onClick={() => setEditor('new')}>
             <Plus size={17} /> Add product
@@ -41,16 +40,13 @@ export default function ProductManager() {
           <Store size={27} />
         </div>
         <div>
-          <span>YOUR STOREFRONT</span>
+          <span>YOUR PRODUCT COLLECTION</span>
           <h2>{data.profile.business}</h2>
           <p>
             {data.profile.category} · {published} published{' '}
             {published === 1 ? 'product' : 'products'}
           </p>
         </div>
-        <Link className="store-preview-link" to="/store/demo">
-          <Eye size={17} /> View as visitor
-        </Link>
       </section>
       <div className="product-stat-grid">
         <div>
@@ -151,8 +147,8 @@ export default function ProductManager() {
         </Empty>
       )}
       <p className="product-demo-note">
-        Your demo storefront is a visitor preview in this browser. Drafts, SKUs and stock records
-        stay in your merchant workspace.
+        The visitor storefront is archived. Your saved products and publication settings are
+        preserved in this browser.
       </p>
       {editor && (
         <Dialog

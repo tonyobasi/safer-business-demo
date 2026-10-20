@@ -2,6 +2,8 @@ import type { Workspace } from '@safer/contracts';
 export function seed(): Workspace {
   const now = new Date().toISOString();
   return {
+    staff: [],
+    payrollRuns: [],
     profile: {
       name: 'Ada Okafor',
       business: 'Ada Atelier',

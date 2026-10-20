@@ -1,4 +1,6 @@
-# Products and storefront demo
+# Products and archived storefront demo
+
+The visitor storefront was archived on 20 October 2026. Its route, visitor entry button and demo transport endpoint are disabled. Product management, saved data and publication settings remain intact. `apps/web/src/features/store/Storefront.tsx` and its styles are retained for restoration. The visitor behaviour described below documents the archived feature.
 
 Open `/app/catalogue` to manage products. Add or edit a product with up to four images, title, description, price/currency, SKU, business type, category, subcategory and opening stock. The first image is the cover; additional images can be promoted to cover or removed. Stock movements continue to record sales and restocks independently of payments.
 

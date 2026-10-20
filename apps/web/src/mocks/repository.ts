@@ -1,4 +1,7 @@
 import {
+  staffSchema,
+  type StaffInput,
+  type PayrollRun,
   productSchema,
   type ProductInput,
   deliverySchema,
@@ -32,6 +35,8 @@ function load(): Workspace {
     const saved = localStorage.getItem(key);
     if (!saved) return seed();
     const workspace = JSON.parse(saved) as Workspace;
+    workspace.staff ??= [];
+    workspace.payrollRuns ??= [];
     workspace.balances = { ...seed().balances, ...workspace.balances };
     return workspace;
   } catch {
@@ -54,6 +59,16 @@ function save(type: EventEnvelope['type'], entityId: string) {
     payload: {},
   };
   events.dispatchEvent(new CustomEvent('domain', { detail: event }));
+}
+function payrollSave(change: () => void, id: string) {
+  const previous = structuredClone(data());
+  try {
+    change();
+    save('payroll.updated', id);
+  } catch {
+    memory = previous;
+    throw new DomainError('STORAGE', 'Unable to save payroll. Device storage may be full.');
+  }
 }
 export const repo = {
   read: () => structuredClone(data()),
@@ -235,6 +250,106 @@ export const repo = {
     d.status = stages[Math.min(stages.indexOf(d.status) + 1, 3)];
     save('delivery.updated', id);
     return d;
+  },
+  saveStaff: (input: StaffInput, id?: string) => {
+    const v = staffSchema.parse(input);
+    if (id && !data().staff.some((s) => s.id === id))
+      throw new DomainError('NOT_FOUND', 'Staff member not found.');
+    if (
+      v.email &&
+      data().staff.some((s) => s.id !== id && s.email.toLowerCase() === v.email.toLowerCase())
+    )
+      throw new DomainError('DUPLICATE_EMAIL', 'A staff member with this email already exists.');
+    const staff = { ...v, id: id ?? crypto.randomUUID() };
+    payrollSave(() => {
+      data().staff = id
+        ? data().staff.map((s) => (s.id === id ? staff : s))
+        : [...data().staff, staff];
+    }, staff.id);
+    return structuredClone(staff);
+  },
+  createPayroll: (month: string, currency: StaffInput['currency']) => {
+    if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month))
+      throw new DomainError('MONTH', 'Choose a valid payroll month.');
+    if (!['NGN', 'USD', 'EUR', 'USDC'].includes(currency))
+      throw new DomainError('CURRENCY', 'Choose a supported currency.');
+    if (
+      data().payrollRuns.some(
+        (r) => r.month === month && r.currency === currency && r.status !== 'cancelled',
+      )
+    )
+      throw new DomainError(
+        'DUPLICATE_RUN',
+        'Payroll already exists for this month and currency. Open the existing run.',
+      );
+    const lines = data()
+      .staff.filter(
+        (s) => s.status === 'active' && s.currency === currency && s.startDate.slice(0, 7) <= month,
+      )
+      .map((s) => ({
+        staffId: s.id,
+        name: s.name,
+        role: s.role,
+        department: s.department,
+        salaryMinor: toMinor(s.salary),
+        allowanceMinor: toMinor(s.allowance),
+        deductionMinor: toMinor(s.deduction),
+        deductionNote: s.deductionNote,
+        netMinor: (
+          BigInt(toMinor(s.salary)) +
+          BigInt(toMinor(s.allowance)) -
+          BigInt(toMinor(s.deduction))
+        ).toString(),
+      }));
+    if (!lines.length)
+      throw new DomainError(
+        'NO_STAFF',
+        'Add active staff in this currency with a start date on or before this payroll month.',
+      );
+    const sum = (field: 'salaryMinor' | 'allowanceMinor' | 'deductionMinor' | 'netMinor') =>
+      lines.reduce((n, line) => n + BigInt(line[field]), 0n);
+    const run: PayrollRun = {
+      id: crypto.randomUUID(),
+      month,
+      currency,
+      status: 'draft',
+      createdAt: new Date().toISOString(),
+      lines,
+      grossMinor: (sum('salaryMinor') + sum('allowanceMinor')).toString(),
+      deductionMinor: sum('deductionMinor').toString(),
+      netMinor: sum('netMinor').toString(),
+    };
+    payrollSave(() => {
+      data().payrollRuns.unshift(run);
+    }, run.id);
+    return structuredClone(run);
+  },
+  advancePayroll: (id: string, action: 'approve' | 'pay' | 'cancel') => {
+    const run = data().payrollRuns.find((r) => r.id === id);
+    if (!run) throw new DomainError('NOT_FOUND', 'Payroll run not found.');
+    if (action === 'pay' && run.status === 'paid') return structuredClone(run);
+    if (action === 'approve' && run.status === 'approved') return structuredClone(run);
+    const allowed =
+      (action === 'approve' && run.status === 'draft') ||
+      (action === 'pay' && run.status === 'approved') ||
+      (action === 'cancel' && run.status === 'draft');
+    if (!allowed)
+      throw new DomainError(
+        'PAYROLL_STATE',
+        'This action is not available for the current payroll status.',
+      );
+    payrollSave(() => {
+      if (action === 'approve') {
+        run.status = 'approved';
+        run.approvedAt = new Date().toISOString();
+      }
+      if (action === 'pay') {
+        run.status = 'paid';
+        run.paidAt = new Date().toISOString();
+      }
+      if (action === 'cancel') run.status = 'cancelled';
+    }, id);
+    return structuredClone(run);
   },
   profile: (p: Profile) => {
     data().profile = p;

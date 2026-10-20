@@ -1,3 +1,5 @@
+import type { Staff, PayrollRun } from './payroll';
+export * from './payroll';
 import { z } from 'zod';
 export type Currency = 'USD' | 'NGN' | 'EUR' | 'USDC';
 export interface Money {
@@ -90,6 +92,8 @@ export interface Preferences {
   stock: boolean;
 }
 export interface Workspace {
+  staff: Staff[];
+  payrollRuns: PayrollRun[];
   profile: Profile;
   preferences: Preferences;
   links: PaymentLink[];
@@ -116,7 +120,8 @@ export interface EventEnvelope<T = unknown> {
     | 'inventory.updated'
     | 'delivery.updated'
     | 'profile.updated'
-    | 'link.created';
+    | 'link.created'
+    | 'payroll.updated';
   entityId: string;
   version: number;
   occurredAt: string;

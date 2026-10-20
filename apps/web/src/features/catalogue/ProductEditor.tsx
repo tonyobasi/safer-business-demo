@@ -71,7 +71,7 @@ export default function ProductEditor({
       client.invalidateQueries({ queryKey: ['storefront'] });
       toast(
         value.visibility === 'published'
-          ? 'Product published to your demo storefront.'
+          ? 'Product saved. The visitor storefront is currently archived.'
           : 'Product saved as a draft.',
       );
       onDone();
@@ -299,7 +299,7 @@ export default function ProductEditor({
         )}
       </section>
       <section className="product-publishing">
-        <h3>Storefront visibility</h3>
+        <h3>Saved publication setting</h3>
         <label>
           Publication status
           <select
@@ -307,12 +307,12 @@ export default function ProductEditor({
             onChange={(e) => update('visibility', e.target.value as ProductInput['visibility'])}
           >
             <option value="draft">Draft · only you can see it</option>
-            <option value="published">Published · visible to visitors</option>
+            <option value="published">Published · storefront archived</option>
           </select>
         </label>
         <p>
-          Publish when your photos, description and price are ready. You can return a product to
-          draft at any time.
+          The visitor storefront is archived. Publication settings are saved for when it is
+          restored.
         </p>
       </section>
       {(error || mutation.error) && (
