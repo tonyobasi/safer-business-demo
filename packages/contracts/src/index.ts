@@ -18,6 +18,7 @@ export const linkSchema = z.object({
   customer: z.string().trim().max(100),
   email: z.union([z.literal(''), z.email('Enter a valid email.')]),
   expires: z.enum(['7', '30', '90']),
+  allowStablecoin: z.boolean().optional(),
 });
 export type LinkInput = z.infer<typeof linkSchema>;
 export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'expired';
@@ -31,7 +32,11 @@ export interface PaymentLink {
   createdAt: string;
   expiresAt: string;
   status: PaymentStatus;
+  allowStablecoin?: boolean;
 }
+// Existing USD links offered USDC before this preference was introduced.
+export const allowsStablecoin = (link: PaymentLink) =>
+  link.allowStablecoin ?? link.currency === 'USD';
 export interface Payment {
   id: string;
   linkId?: string;

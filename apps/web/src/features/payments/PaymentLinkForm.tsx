@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { linkSchema, type Currency, type LinkInput, type PaymentLink } from '@safer/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { useId } from 'react';
 import { Button } from '../../components/ui';
 import { api } from '../../lib/api';
 export function PaymentLinkForm({
@@ -14,13 +15,22 @@ export function PaymentLinkForm({
   amount?: string;
 }) {
   const client = useQueryClient();
+  const stablecoinDescription = useId();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LinkInput>({
     resolver: zodResolver(linkSchema),
-    defaultValues: { title: '', amount, currency, customer: '', email: '', expires: '30' },
+    defaultValues: {
+      title: '',
+      amount,
+      currency,
+      customer: '',
+      email: '',
+      expires: '30',
+      allowStablecoin: false,
+    },
   });
   const mutation = useMutation({
     mutationFn: (v: LinkInput) => api<PaymentLink>('/payment-links', v),
@@ -78,9 +88,25 @@ export function PaymentLinkForm({
           <option value="90">90 days</option>
         </select>
       </label>
+      <label className="payment-link-stablecoin">
+        <input
+          type="checkbox"
+          {...register('allowStablecoin')}
+          aria-describedby={stablecoinDescription}
+        />
+        <span>
+          <strong>Allow stablecoin payments</strong>
+          <small id={stablecoinDescription}>
+            Let customers pay with USDC alongside bank transfer. Conversion and network details are
+            provided at checkout by the live payment provider.
+          </small>
+        </span>
+        <span className="stablecoin-token" aria-hidden="true">
+          USDC
+        </span>
+      </label>
       <p className="muted small-text">
-        Review the amount and currency before creating your link. USD links offer US virtual account
-        and USDC checkout options.
+        Review the amount, currency and payment options before creating your link.
       </p>
       {mutation.error && (
         <p className="form-error" role="alert">

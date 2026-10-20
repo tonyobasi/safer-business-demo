@@ -20,6 +20,7 @@ import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useSession } from '../app/session';
 import { isDemo, useWorkspace } from '../lib/api';
 import { money } from '../lib/money';
+import { useKeyboardViewport } from '../lib/useKeyboardViewport';
 import { Button, Dialog, ErrorState, HelpDialog, Loading, Logo } from './ui';
 export const navigation = [
   { to: '/app', label: 'Assistant', icon: Sparkles, end: true },
@@ -212,6 +213,7 @@ export function Balances({ data, compact = false }: { data: Workspace; compact?:
   );
 }
 export function WorkspaceShell() {
+  const viewportRef = useKeyboardViewport();
   useEffect(() => {
     sessionStorage.removeItem('safer-onboarding');
   }, []);
@@ -235,7 +237,7 @@ export function WorkspaceShell() {
       <ErrorState message={error?.message || 'Workspace unavailable.'} retry={() => refetch()} />
     );
   return (
-    <div className="workspace-shell">
+    <div className="workspace-shell" ref={viewportRef}>
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
@@ -248,21 +250,24 @@ export function WorkspaceShell() {
           <Menu size={22} />
         </button>
         <Logo to="/app" />
-        <span className="header-divider" />
-        <span className="business-picker" aria-label={`Business: ${data.profile.business}`}>
-          {data.profile.business}
-        </span>
         <div className="header-end">
           <span className="workspace-health">
             <i />
             {isDemo ? 'Demo workspace' : 'Workspace connected'}
           </span>
-          <Link className="avatar" aria-label="Your profile" to="/app/profile">
-            {data.profile.name
-              .split(' ')
-              .map((n) => n[0])
-              .slice(0, 2)
-              .join('')}
+          <Link
+            className="header-profile"
+            aria-label={`${data.profile.business} · Your profile`}
+            to="/app/profile"
+          >
+            <span className="header-profile-business">{data.profile.business}</span>
+            <span className="avatar">
+              {data.profile.name
+                .split(' ')
+                .map((n) => n[0])
+                .slice(0, 2)
+                .join('')}
+            </span>
           </Link>
         </div>
       </header>
@@ -429,7 +434,7 @@ export function WorkspaceShell() {
           <p className="security-footnote">Your business. Your next chapter.</p>
         </aside>
       </div>
-      <nav className="mobile-bottom-nav">
+      <nav className="mobile-bottom-nav" aria-label="Main workspace navigation">
         {navigation.slice(0, 4).map((n) => (
           <NavLink end={n.end} to={n.to} key={n.to}>
             <n.icon size={19} />

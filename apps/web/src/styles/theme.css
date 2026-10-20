@@ -1,0 +1,781 @@
+/* Shared demo design tokens: lime, warm ivory, Outfit and Switzer. */
+:root {
+  font-family: Switzer, Inter, sans-serif;
+  color: #0a0a0a;
+  background: #fafaf7;
+  --accent: #cdf140;
+  --accent-ink: #0a0a0a;
+  --accent-deep: #b6d62a;
+  --ink: #0a0a0a;
+  --muted: #6b7280;
+  --line: #eceae3;
+  --canvas: #fafaf7;
+  --soft: #f5f5f0;
+  --display: 'Outfit Variable', sans-serif;
+  --body: Switzer, Inter, sans-serif;
+  --surface-shadow: 0 6px 24px -18px #35351924;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display) !important;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+:root .brand {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+:root .page-heading h1 {
+  font-size: clamp(28px, 2.8vw, 38px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+:root .page-heading .eyebrow {
+  color: #8a8a85;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+:root .page-heading p:last-child {
+  font-size: 14px;
+  color: #6b7280;
+}
+:root .app-header {
+  background: #fafaf7;
+  border-color: #eceae3;
+}
+:root .app-main,
+:root .app-main > .page-content {
+  background: #fafaf7;
+}
+:root .recent-sidebar,
+:root .business-sidebar {
+  background: #f5f5f0;
+  border-color: #eceae3;
+}
+:root .workspace-home-link {
+  background: #cdf140;
+  color: #0a0a0a;
+  border-radius: 999px;
+}
+:root .workspace-home-link:hover,
+:root .workspace-home-link.active {
+  background: #b6d62a;
+  color: #0a0a0a;
+}
+:root .avatar {
+  background: #ecece5;
+  color: #2a2a2a;
+}
+:root .section-label,
+:root .business-nav .rail-label {
+  color: #6b7280;
+}
+:root .business-nav a.active {
+  background: #e5edbd;
+  color: #0a0a0a;
+}
+:root .mobile-nav {
+  background: #fafaf7;
+  border-color: #eceae3;
+}
+:root .mobile-nav a.active {
+  color: #0a0a0a;
+  background: #edf4d5;
+}
+:root .recent-sidebar .recent-payment-cards .recent-payment-card {
+  background: #fff;
+  border-color: #fff;
+  box-shadow: var(--surface-shadow);
+  border-radius: 16px;
+}
+:root .payment-currency-mark {
+  background: #0a0a0a;
+  color: #cdf140;
+  box-shadow: none;
+}
+:root .balance-card {
+  background: #fff;
+  border-color: #eceae3;
+  border-radius: 18px;
+  box-shadow: var(--surface-shadow);
+}
+:root .balance-dark,
+:root .payments-page .balance-horizontal .balance-dark {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  box-shadow: none;
+  color: #fafaf7;
+}
+:root .balance-card > strong {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+:root .balance-dark > strong {
+  color: #cdf140;
+}
+:root .balance-dark .pending {
+  border-color: #ffffff18;
+}
+:root .payments-page .balance-horizontal .balance-card:not(.balance-dark) {
+  background: #fff;
+}
+:root .balance-card .balance-caption {
+  font-size: 11px;
+}
+:root .business-sidebar .create-wallet-button {
+  border-color: #e2e2d9;
+  background: #fff;
+  box-shadow: none;
+  border-radius: 999px;
+}
+:root .quick-actions .quick-icon {
+  border-radius: 14px;
+}
+:root .agent-page {
+  background: radial-gradient(ellipse at 50% 8%, #f4f7e9 0%, #fafaf7 70%);
+}
+:root .agent-page .agent-welcome h1 {
+  font-family: var(--display);
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+:root .agent-page .agent-welcome > p:not(.eyebrow) {
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.55;
+}
+:root .agent-page .prompt-card {
+  background: #fff;
+  border-color: #fff;
+  border-radius: 18px;
+  box-shadow: var(--surface-shadow);
+}
+:root .agent-page .prompt-card:hover {
+  background: #f8fbe9;
+  box-shadow: 0 8px 24px -14px #68772830;
+}
+:root .agent-page .prompt-card > svg {
+  background: #cdf140;
+  color: #0a0a0a;
+  box-shadow: none;
+}
+:root .agent-page .prompt-card span {
+  font-weight: 500;
+  font-size: 13px;
+}
+:root .agent-page .prompt-card small {
+  color: #8a8a85;
+  font-weight: 600;
+  font-size: 9px;
+}
+:root .agent-page .composer-wrap {
+  background: linear-gradient(0deg, #fafaf7, #fafaf700);
+}
+:root .agent-page .composer {
+  background: #fff;
+  border-color: #eceae3;
+  box-shadow: var(--surface-shadow);
+}
+:root .agent-page .composer:focus-within {
+  box-shadow: 0 5px 20px -12px #7d8f3430;
+}
+:root .composer .send-button {
+  background: #cdf140;
+  color: #0a0a0a;
+}
+:root .composer .send-button:disabled {
+  background: #e8e9df;
+  color: #999d89;
+}
+:root .assistant-mark {
+  background: #cdf140;
+  color: #0a0a0a;
+  font-family: var(--display);
+}
+:root .agent-page .message-user {
+  background: #edf4d5;
+  border-color: #e5edc3;
+  box-shadow: none;
+}
+:root .agent-page .agent-card {
+  background: #fff;
+  border: 1px solid #eceae3;
+  box-shadow: var(--surface-shadow);
+}
+:root .chat-link-summary {
+  background: #0a0a0a;
+}
+:root .chat-link-amount {
+  font-family: var(--display);
+  color: #cdf140;
+  font-weight: 800;
+}
+:root .chat-link-copy button {
+  background: #cdf140;
+  color: #0a0a0a;
+  border-radius: 999px;
+}
+:root .chat-link-copy input {
+  background: #f5f5f0;
+  color: #6b7280;
+}
+:root .card,
+:root .summary-card {
+  border-color: #eceae3;
+  border-radius: 20px;
+  background: #fff;
+}
+:root .summary-card > strong,
+:root .stock-counts strong {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+:root .catalogue-page .summary-card {
+  box-shadow: var(--surface-shadow);
+}
+:root .toolbar input,
+:root .toolbar select,
+:root input,
+:root select,
+:root textarea {
+  border-color: #eceae3;
+}
+:root input:focus-visible,
+:root select:focus-visible,
+:root textarea:focus-visible {
+  outline-color: #8ba51e;
+}
+:root .agent-page .composer textarea:focus-visible {
+  outline: none;
+}
+:root .toolbar input,
+:root .toolbar select,
+:root .payments-page .payments-toolbar input,
+:root .payments-page .payments-toolbar select,
+:root .payment-links-page .toolbar input {
+  background: #f5f5f0;
+}
+:root .payments-activity,
+:root .payment-links-page .toolbar {
+  background: #fff;
+  box-shadow: var(--surface-shadow);
+}
+:root .payment-feed-link,
+:root .payment-links-page .link-row {
+  background: #fafaf7;
+  border-color: #f3f3ed;
+  box-shadow: none;
+}
+:root .payment-feed-link:hover,
+:root .payment-links-page .link-row:hover {
+  background: #f1f5e0;
+}
+:root .payment-feed-avatar,
+:root .payment-links-page .link-row .list-icon {
+  background: #cdf140;
+  color: #0a0a0a;
+  box-shadow: none;
+}
+:root .payment-feed-value > strong,
+:root .payment-links-page .amount-column > strong {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+}
+:root .payment-receipt-hero,
+:root .payment-link-summary,
+:root .withdrawal-balance {
+  background: #0a0a0a;
+  box-shadow: none;
+}
+:root .payment-receipt-hero > h2,
+:root .payment-link-summary > h2,
+:root .withdrawal-balance > strong {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #cdf140;
+}
+:root .receipt-info-grid > div,
+:root .payment-link-info > div {
+  background: #f5f5f0;
+}
+:root .receipt-customer-avatar {
+  background: #edf4d5;
+  box-shadow: none;
+}
+:root .payment-link-share-panel input {
+  background: #f5f5f0;
+}
+:root .payment-link-body > .primary-link,
+:root .primary-link {
+  background: #cdf140;
+  color: #0a0a0a;
+  border-radius: 999px;
+  font-weight: 600;
+}
+:root .settings-page .settings-form,
+:root .deliveries-page .delivery-list-card,
+:root .profile-page .card {
+  background: #fff;
+  border-color: #eceae3;
+  box-shadow: var(--surface-shadow);
+}
+:root .settings-section-title > span,
+:root .deliveries-page .delivery-list-card .list-icon {
+  background: #cdf140;
+  color: #0a0a0a;
+  box-shadow: none;
+}
+:root .settings-page .toggle-row,
+:root .deliveries-page .route-preview {
+  background: #f5f5f0;
+  border-color: #f5f5f0;
+  box-shadow: none;
+}
+:root .settings-page .toggle-row input:checked,
+:root .toggle-row input:checked {
+  background: #cdf140;
+}
+:root .settings-page .toggle-row input:checked::before {
+  background: #0a0a0a;
+}
+:root .segmented,
+:root .deliveries-page .segmented {
+  background: #ecece5;
+  box-shadow: none;
+  border-radius: 999px;
+}
+:root .segmented button,
+:root .segmented button.selected {
+  border-radius: 999px;
+}
+:root .segmented button.selected,
+:root .deliveries-page .segmented button.selected {
+  background: #cdf140;
+  color: #0a0a0a;
+  box-shadow: 0 2px 6px #47492d0a;
+}
+:root .profile-page input,
+:root .profile-page select,
+:root .profile-page textarea {
+  background: #f5f5f0;
+  box-shadow: none;
+}
+:root .tracking-visual {
+  background: #edf1dd;
+}
+:root .tracking-visual .map-pin {
+  background: #fff;
+  border-color: #e2e7ce;
+  color: #0a0a0a;
+}
+:root .tracking-visual .map-pin.rider,
+:root .delivery-timeline .complete > span {
+  background: #cdf140;
+  color: #0a0a0a;
+}
+:root .dialog,
+:root .dialog:has(.wallet-create-form),
+:root .dialog:has(.delivery-booking-form),
+:root .dialog:has(.withdrawal-form) {
+  background: #fafaf7;
+  border: 1px solid #eceae3;
+  border-radius: 24px;
+  box-shadow: 0 20px 70px -30px #1a1a0a55;
+}
+:root .dialog > header {
+  background: transparent;
+  border-color: #eceae3;
+}
+:root .dialog > header h2 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+:root .dialog input,
+:root .dialog select,
+:root .dialog textarea {
+  background: #fff;
+  border-color: #eceae3;
+  box-shadow: none;
+  border-radius: 12px;
+  color: #0a0a0a;
+}
+:root .wallet-currency-option {
+  background: #fff;
+  border-color: #eceae3;
+  box-shadow: none;
+}
+:root .wallet-currency-option.selected {
+  background: #cdf140;
+  border-color: #b6d62a;
+  color: #0a0a0a;
+  box-shadow: none;
+}
+:root .wallet-currency-option.selected small {
+  color: #4b5429;
+}
+:root .notice,
+:root .delivery-booking-form > p.small-text {
+  background: #f0f0ea;
+  color: #6b7280;
+  border-color: #e8e8df;
+}
+:root .delivery-booking-form .delivery-quote {
+  background: #0a0a0a;
+  color: #fafaf7;
+}
+:root .delivery-booking-form .delivery-quote > strong {
+  color: #cdf140;
+}
+:root .modern-checkout {
+  background: #fafaf7;
+}
+:root .modern-checkout .checkout-card {
+  background: #fff;
+  border-color: #eceae3;
+  box-shadow: var(--surface-shadow);
+}
+:root .checkout-summary {
+  background: #0a0a0a;
+  box-shadow: none;
+}
+:root .modern-checkout .checkout-summary .checkout-amount {
+  color: #cdf140;
+  font-weight: 800;
+}
+:root .modern-checkout .payment-instructions,
+:root .modern-checkout .demo-controls {
+  background: #f5f5f0;
+}
+:root .modern-checkout .notice {
+  background: #ecece5;
+}
+:root .modern-checkout .segmented button.selected {
+  background: #cdf140;
+  color: #0a0a0a;
+}
+:root .auth-layout .onboarding-steps .active {
+  background: #b6d62a;
+}
+:root .auth-layout .auth-form-card input {
+  background: #fafaf7;
+}
+:root .auth-layout .auth-form-card .segmented button.selected {
+  background: #cdf140;
+  color: #0a0a0a;
+}
+:root .auth-layout .auth-form-card .signup-dial-code {
+  border-color: #eceae3;
+}
+:root .auth-layout .auth-form-card .signup-phone-field input {
+  border: 0;
+}
+:root .auth-layout .auth-form-card button.auth-demo-entry {
+  background: #cdf140;
+  color: #0a0a0a;
+}
+/* Retained landing source uses the same family and accent if routed again. */
+:root .landing {
+  background: #fafaf7;
+  font-family: var(--body);
+}
+:root .landing .pill-button {
+  background: #cdf140;
+  color: #0a0a0a;
+  border-radius: 999px;
+}
+@media (max-width: 700px) {
+  :root .agent-page .agent-welcome h1 {
+    font-size: 30px;
+  }
+  :root .page-heading h1 {
+    font-size: 30px;
+  }
+  :root .payment-feed-value > strong,
+  :root .payment-links-page .amount-column > strong {
+    font-size: 14px;
+  }
+}
+/* Keep visually hidden table labels inside the horizontal scroll area. */
+.table-scroll {
+  position: relative;
+}
+
+/* A floating dock that reserves its own space below the workspace. */
+@media screen and (max-width: 1020px) {
+  :root .mobile-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    flex-shrink: 0;
+    align-items: stretch;
+    gap: 5px;
+    width: calc(100% - 24px);
+    max-width: 620px;
+    height: auto;
+    min-height: 68px;
+    margin: 8px auto max(10px, env(safe-area-inset-bottom));
+    padding: 6px;
+    border: 1px solid #e9e9df;
+    border-radius: 24px;
+    background: #ffffffed;
+    box-shadow:
+      0 8px 28px -14px #35351930,
+      inset 0 1px 0 #fff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  :root .mobile-bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    min-height: 54px;
+    padding: 7px 4px;
+    border-radius: 18px;
+    color: #818577;
+    background: transparent;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.2;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  :root .mobile-bottom-nav a > svg {
+    width: 21px;
+    height: 21px;
+    stroke-width: 1.8;
+  }
+  :root .mobile-bottom-nav a:hover {
+    background: #f3f6e8;
+    color: #30351b;
+  }
+  :root .mobile-bottom-nav a.active {
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 700;
+    box-shadow:
+      inset 0 1px 0 #e9ff9c,
+      0 3px 9px #b6d62a24;
+  }
+  :root .mobile-bottom-nav a.active > svg {
+    stroke-width: 2.2;
+  }
+  :root .mobile-bottom-nav a:focus-visible {
+    outline: 2px solid #748a21;
+    outline-offset: 2px;
+  }
+}
+@media screen and (min-width: 701px) and (max-width: 1020px) {
+  :root .mobile-bottom-nav {
+    margin-top: 10px;
+    max-width: 600px;
+  }
+  :root .mobile-bottom-nav a {
+    flex-direction: row;
+    gap: 9px;
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root .mobile-bottom-nav a {
+    transition: none;
+  }
+}
+
+/* Native scrolling, styled to match the lemon palette. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b6ce46 transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb {
+  background: #b6ce46;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+  min-height: 32px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #95ae25;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+@media (forced-colors: active) {
+  * {
+    scrollbar-color: auto;
+  }
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  border-radius: 999px;
+}
+.header-profile-business {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.header-profile .avatar {
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .header-profile {
+    gap: 7px;
+  }
+  .header-profile-business {
+    max-width: 88px;
+    font-size: 11px;
+  }
+  .app-header .header-end {
+    min-width: 0;
+  }
+}
+
+:root .payment-link-stablecoin {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #e5e9d1;
+  border-radius: 15px;
+  background: #f3f7e5;
+  cursor: pointer;
+}
+:root .payment-link-stablecoin input[type='checkbox'] {
+  appearance: auto;
+  accent-color: #94ae1f;
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  margin: 2px 0 0;
+  padding: 0;
+  border-radius: 4px;
+  flex: 0 0 18px;
+  box-shadow: none;
+}
+.payment-link-stablecoin > span:not(.stablecoin-token) {
+  min-width: 0;
+}
+.payment-link-stablecoin strong {
+  display: block;
+  font-size: 13px;
+  color: #151a08;
+}
+.payment-link-stablecoin small {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #727b5a;
+}
+.stablecoin-token {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 5px 7px;
+  border-radius: 6px;
+  background: #e4edc1;
+  color: #4f5c23;
+}
+.stablecoin-conversion-note {
+  padding: 12px;
+  border-radius: 10px;
+  background: #eaf0d8;
+  font-size: 11px;
+  line-height: 1.6;
+}
+@media (max-width: 420px) {
+  .payment-link-stablecoin .stablecoin-token {
+    display: none;
+  }
+}
+
+/* Size the workspace to the visible area, not the screen behind the keyboard. */
+@media screen and (max-width: 1020px) {
+  .workspace-shell {
+    height: var(--workspace-visible-height, 100dvh);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .workspace-shell[data-keyboard-open] {
+    position: fixed;
+    top: var(--workspace-viewport-top, 0px);
+    left: 0;
+    width: 100%;
+  }
+  .workspace-shell[data-keyboard-open] .mobile-bottom-nav {
+    display: none;
+  }
+  .workspace-shell .workspace-body {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .workspace-shell .app-main {
+    min-height: 0;
+  }
+  .workspace-shell .agent-page {
+    min-height: 0;
+  }
+  .workspace-shell .agent-scroll {
+    min-height: 0;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .workspace-shell[data-keyboard-open] .agent-scroll {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .workspace-shell[data-keyboard-open] .composer-wrap {
+    padding-top: 6px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+  :root .workspace-shell .composer textarea {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  :root .workspace-shell[data-keyboard-open] .composer {
+    padding: 10px 14px;
+  }
+  :root .auth-layout input,
+  :root .auth-layout select,
+  :root .auth-layout textarea,
+  :root .workspace-shell input,
+  :root .workspace-shell select,
+  :root .workspace-shell textarea,
+  :root .modern-checkout input {
+    font-size: 16px;
+  }
+}

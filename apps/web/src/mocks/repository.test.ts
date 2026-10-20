@@ -84,3 +84,26 @@ describe('catalogue creation', () => {
     expect(repo.read().items).toHaveLength(4);
   });
 });
+
+describe('optional stablecoin checkout', () => {
+  it.each(['USD', 'NGN'] as const)(
+    'persists USDC preference for %s and supports demo settlement',
+    (currency) => {
+      const link = repo.createLink(
+        { ...input, currency, allowStablecoin: true },
+        `usdc-${currency}`,
+      );
+      expect(repo.link(link.id).allowStablecoin).toBe(true);
+      expect(repo.settle(link.id, 'paid', 'USDC').status).toBe('paid');
+      expect(repo.read().payments.find((p) => p.linkId === link.id)?.method).toBe('USDC');
+    },
+  );
+  it('keeps new links bank-only unless the merchant enables stablecoin', () => {
+    const link = repo.createLink(input, 'bank-only');
+    expect(link.allowStablecoin).toBe(false);
+    expect(() => repo.settle(link.id, 'paid', 'USDC')).toThrow(
+      'Stablecoin payments are not enabled',
+    );
+    expect(repo.link(link.id).status).toBe('pending');
+  });
+});

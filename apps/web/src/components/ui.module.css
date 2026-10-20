@@ -2,10 +2,10 @@
   min-height: 44px;
   border: 1px solid transparent;
   padding: 11px 20px;
-  border-radius: 9px;
+  border-radius: 999px;
   font: inherit;
   font-size: 13px;
-  font-weight: 550;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -25,19 +25,19 @@
   cursor: not-allowed;
 }
 .primary {
-  background: linear-gradient(110deg, #3b3f42, #17191b);
-  color: #fff;
+  background: var(--accent, #cdf140);
+  color: var(--accent-ink, #0a0a0a);
 }
 .primary:hover {
-  background: #101214;
+  background: var(--accent-deep, #b6d62a);
 }
 .secondary {
   background: #fff;
-  border-color: #e1e3e7;
+  border-color: var(--line, #eceae3);
   color: #202326;
 }
 .secondary:hover {
-  background: #f3f4f6;
+  background: var(--soft, #f5f5f0);
 }
 .ghost {
   background: transparent;

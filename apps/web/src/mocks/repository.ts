@@ -1,5 +1,6 @@
 import {
   deliverySchema,
+  allowsStablecoin,
   itemSchema,
   linkSchema,
   type DeliveryInput,
@@ -68,6 +69,7 @@ export const repo = {
       createdAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + Number(v.expires) * 86400000).toISOString(),
       status: 'pending',
+      allowStablecoin: v.allowStablecoin ?? false,
     };
     data().links.unshift(l);
     processed.set(idempotency, l);
@@ -78,6 +80,8 @@ export const repo = {
     const l = data().links.find((x) => x.id === id);
     if (!l) throw new DomainError('NOT_FOUND', 'Payment link not found.');
     if (l.status === 'paid') return l;
+    if (method === 'USDC' && !allowsStablecoin(l))
+      throw new DomainError('PAYMENT_METHOD', 'Stablecoin payments are not enabled for this link.');
     if (new Date(l.expiresAt).getTime() < Date.now())
       throw new DomainError('EXPIRED', 'This payment link has expired.');
     l.status = status;

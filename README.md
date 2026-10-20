@@ -20,7 +20,7 @@ npm run build      # Output: apps/web/dist
 
 ## Implemented frontend
 
-- Direct demo dashboard entry with Kanit headings, supplied logo and glossy workspace screens. Landing source is retained but is not routed.
+- Direct demo dashboard entry with Outfit headings and Switzer body typography, supplied logo and glossy workspace screens. Landing source is retained but is not routed.
 - Nigeria-only country selection with flag/+234, email/phone signup, OTP validation/expiry/resend, password setup, business setup, login and password-recovery views.
 - Responsive merchant shell with glossy Recent payments, USD/NGN balances and demo EUR/GBP wallets, business navigation and a mobile menu.
 - Demo assistant with payment-link, stock, payment and delivery cards; explicit action review, cancellation and retry.
@@ -32,7 +32,7 @@ npm run build      # Output: apps/web/dist
 
 ## What is simulated
 
-This is a frontend implementation, not a live financial service. MSW intercepts `/api` requests on localhost/HTTPS. Sample business data is kept in localStorage; a demo session and chat are kept in sessionStorage. No passwords, API keys or real session credentials are stored. Changing the browser or clearing its storage resets the demonstration. Public checkout is public within this local demo only; shared links do not work across devices without a hosted backend.
+This is a frontend implementation, not a live financial service. Demo mode routes requests directly to the browser-local repository without a service worker or live API. Sample business data is kept in localStorage; a demo session and chat are kept in sessionStorage. No passwords, API keys or real session credentials are stored. Changing the browser or clearing its storage resets the demonstration. Public checkout is public within this local demo only; shared links do not work across devices without a hosted backend.
 
 The assistant is a deterministic mock adapter, not connected to OpenAI. Email/SMS, real authentication, funds, US virtual accounts, USDC addresses, withdrawals, riders and notifications are simulated. USDC receiving-network/address details are deliberately not invented. No Stellar wallet connection is present.
 
@@ -40,7 +40,7 @@ For real services, replace mock endpoints with Node/MySQL services and authentic
 
 ## Design provenance
 
-Based on the approved Safer Business design exports and screen references in `designs/`. The live Figma connector was quota-limited during this implementation, so exact fidelity to subsequent Figma edits is not claimed. The supplied logo, Kanit typography, approved tagline, section colours and recorded African photography were retained. Photos are illustrative, not customer endorsements; credits are in `apps/web/public/photo-credits.md`.
+Based on the approved Safer Business design exports and screen references in `designs/`. The live Figma connector was quota-limited during this implementation, so exact fidelity to subsequent Figma edits is not claimed. The supplied logo, current Outfit/Switzer typography, approved tagline, section colours and recorded African photography were retained. Photos are illustrative, not customer endorsements; credits are in `apps/web/public/photo-credits.md`.
 
 The landing workspace illustration is built from HTML/components rather than a screenshot asset. Screen modules are independent files with shared components and responsive CSS.
 

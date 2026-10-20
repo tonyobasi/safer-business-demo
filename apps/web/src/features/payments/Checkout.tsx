@@ -1,4 +1,4 @@
-import type { PaymentLink } from '@safer/contracts';
+import { allowsStablecoin, type PaymentLink } from '@safer/contracts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Check, Clock, ShieldCheck, X } from 'lucide-react';
 import { useState } from 'react';
@@ -25,7 +25,7 @@ export default function Checkout() {
       api(`/payment-links/${token}/simulate`, {
         status,
         method:
-          method === 'usdc'
+          method === 'usdc' && link && allowsStablecoin(link)
             ? 'USDC'
             : link?.currency === 'USD'
               ? 'US virtual account'
@@ -46,6 +46,8 @@ export default function Checkout() {
       </div>
     );
   const expired = new Date(link.expiresAt).getTime() < Date.now() && link.status !== 'paid';
+  const stablecoinEnabled = allowsStablecoin(link);
+  const payingWithStablecoin = stablecoinEnabled && method === 'usdc';
   return (
     <div className="checkout-page modern-checkout">
       <Logo />
@@ -135,32 +137,38 @@ export default function Checkout() {
                   : 'Pay securely without creating an account.'}
               </p>
             </div>
-            {link.currency === 'USD' && (
+            {stablecoinEnabled && (
               <div className="segmented">
                 <button
                   aria-pressed={method === 'bank'}
                   className={method === 'bank' ? 'selected' : ''}
                   onClick={() => setMethod('bank')}
                 >
-                  US virtual account
+                  {link.currency === 'USD' ? 'US virtual account' : 'Bank transfer'}
                 </button>
                 <button
                   aria-pressed={method === 'usdc'}
                   className={method === 'usdc' ? 'selected' : ''}
                   onClick={() => setMethod('usdc')}
                 >
-                  USDC
+                  Stablecoin · USDC
                 </button>
               </div>
             )}
             <div className="payment-instructions">
-              {method === 'usdc' ? (
+              {payingWithStablecoin ? (
                 <>
                   <strong>Pay with USDC</strong>
                   <p>
                     A supported network and receiving address will be supplied by the live payment
                     provider.
                   </p>
+                  {link.currency === 'NGN' && (
+                    <p className="stablecoin-conversion-note">
+                      Your invoice is in NGN. The live provider will quote the USDC amount and
+                      conversion rate before payment. No conversion is calculated in this demo.
+                    </p>
+                  )}
                   <div className="notice">Demo address only · Do not send crypto.</div>
                   <input
                     aria-label="Demo USDC receiving address"

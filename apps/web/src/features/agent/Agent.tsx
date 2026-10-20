@@ -372,9 +372,6 @@ export default function Agent() {
             )}
           </div>
         </form>
-        <p className="composer-footnote">
-          Demo assistant · Responses and business actions are simulated. Review every detail.
-        </p>
       </div>
     </div>
   );

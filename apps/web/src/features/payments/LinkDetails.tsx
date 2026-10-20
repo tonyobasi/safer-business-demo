@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { Link2 } from 'lucide-react';
+import { allowsStablecoin } from '@safer/contracts';
 import { CopyButton, ErrorState, Loading, PageHeading, Status } from '../../components/ui';
 import { useWorkspace } from '../../lib/api';
 import { date, money } from '../../lib/money';
@@ -53,7 +54,8 @@ export default function LinkDetails() {
             <div>
               <span>Payment options</span>
               <strong>
-                {l.currency === 'USD' ? 'US virtual account · USDC' : 'NGN bank transfer'}
+                {l.currency === 'USD' ? 'US virtual account' : 'NGN bank transfer'}
+                {allowsStablecoin(l) ? ' · USDC' : ''}
               </strong>
             </div>
           </div>
