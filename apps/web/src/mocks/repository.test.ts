@@ -1,5 +1,5 @@
 import type { LinkInput } from '@safer/contracts';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { repo } from './repository';
 const input: LinkInput = {
   title: 'Test linen set',
@@ -105,5 +105,87 @@ describe('optional stablecoin checkout', () => {
       'Stablecoin payments are not enabled',
     );
     expect(repo.link(link.id).status).toBe('pending');
+  });
+});
+
+describe('EUR and USDC payment links', () => {
+  it.each(['EUR', 'USDC'] as const)(
+    'creates, reloads and settles a %s invoice in its own balance',
+    (currency) => {
+      const link = repo.createLink({ ...input, currency }, `invoice-${currency}`);
+      expect(repo.link(link.id).currency).toBe(currency);
+      repo.reload();
+      expect(repo.link(link.id).currency).toBe(currency);
+      repo.settle(link.id, 'paid', currency === 'USDC' ? 'USDC' : 'Euro bank transfer');
+      expect(repo.read().balances[currency].available).toBe('12009');
+    },
+  );
+  it('automatically enables stablecoin checkout for a USDC invoice', () => {
+    expect(
+      repo.createLink({ ...input, currency: 'USDC', allowStablecoin: false }, 'usdc-invoice')
+        .allowStablecoin,
+    ).toBe(true);
+  });
+});
+
+describe('merchant products and visitor storefront', () => {
+  const product = {
+    name: 'Everyday linen set',
+    sku: 'NEW-LINEN-001',
+    amount: '15000.50',
+    currency: 'NGN' as const,
+    quantity: 8,
+    businessType: 'Fashion & accessories',
+    category: 'Clothing',
+    subcategory: 'Two-piece sets',
+    description: 'A comfortable linen set for everyday wear.',
+    images: ['data:image/jpeg;base64,dGVzdA=='],
+    visibility: 'draft' as 'draft' | 'published',
+  };
+  it('keeps drafts private and exposes only customer product details after publishing', () => {
+    const draft = repo.saveProduct(product);
+    expect(repo.storefront().products.some((p) => p.id === draft.id)).toBe(false);
+    repo.saveProduct({ ...product, visibility: 'published' }, draft.id);
+    const visible = repo.storefront().products.find((p) => p.id === draft.id)!;
+    expect(visible.amountMinor).toBe('1500050');
+    expect(visible).not.toHaveProperty('sku');
+    expect(visible).not.toHaveProperty('sold');
+    expect(repo.storefront()).not.toHaveProperty('profile');
+    repo.saveProduct(product, draft.id);
+    expect(repo.storefront().products.some((p) => p.id === draft.id)).toBe(false);
+  });
+  it('validates publication completeness, taxonomy and duplicate SKUs', () => {
+    expect(() => repo.saveProduct({ ...product, images: [], visibility: 'published' })).toThrow(
+      'Published products need',
+    );
+    expect(() => repo.saveProduct({ ...product, businessType: 'Electronics' })).toThrow(
+      'category and subcategory',
+    );
+    repo.saveProduct(product);
+    expect(() => repo.saveProduct({ ...product, sku: 'new-linen-001' })).toThrow(
+      'SKU already exists',
+    );
+  });
+  it('preserves recorded sales and remaining stock when product details change', () => {
+    const created = repo.saveProduct(product);
+    repo.stock(created.id, 2, 'sale', 'product-sale');
+    const edited = repo.saveProduct(
+      { ...product, name: 'Updated linen set', quantity: 100, visibility: 'published' },
+      created.id,
+    );
+    expect(edited.sold).toBe(2);
+    expect(edited.remaining).toBe(6);
+    expect(repo.storefront().products.find((p) => p.id === created.id)?.name).toBe(
+      'Updated linen set',
+    );
+  });
+  it('rolls back a product save when browser storage is full', () => {
+    const spy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('Quota exceeded');
+    });
+    const before = repo.read().items.length;
+    expect(() => repo.saveProduct(product)).toThrow('Device storage is full');
+    expect(repo.read().items).toHaveLength(before);
+    spy.mockRestore();
   });
 });

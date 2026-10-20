@@ -17,10 +17,18 @@ export function prepareResponse(text: string): Omit<ChatMessage, 'id' | 'role'> 
       card: 'stock',
     };
   if (/link|charge|invoice|request.*pay/.test(q)) {
-    const currency = /\$|usd|dollar/i.test(text) ? 'USD' : 'NGN';
+    const currency = /usdc/i.test(text)
+      ? 'USDC'
+      : /€|eur|euro/i.test(text)
+        ? 'EUR'
+        : /\$|usd|dollar/i.test(text)
+          ? 'USD'
+          : 'NGN';
     const amount =
-      text.match(/(?:\$|₦|NGN\s*|USD\s*)([\d,]+(?:\.\d{1,2})?)/i)?.[1]?.replaceAll(',', '') ||
-      text.match(/(\d+(?:\.\d{1,2})?)\s*(?:naira|dollars?|usd|ngn)/i)?.[1] ||
+      text
+        .match(/(?:\$|₦|NGN\s*|USDC\s*|USD\s*|EUR\s*|€)([\d,]+(?:\.\d{1,2})?)/i)?.[1]
+        ?.replaceAll(',', '') ||
+      text.match(/(\d+(?:\.\d{1,2})?)\s*(?:naira|dollars?|usdc|usd|ngn|euros?|eur)/i)?.[1] ||
       '';
     return {
       text: 'I can prepare that payment link. Review the amount, currency and description below, then confirm when everything looks right.',

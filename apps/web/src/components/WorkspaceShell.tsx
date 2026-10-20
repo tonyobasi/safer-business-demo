@@ -1,4 +1,5 @@
 import { TransferIcon } from './TransferIcon';
+import { AccountMenu } from './AccountMenu';
 import type { Workspace } from '@safer/contracts';
 import {
   ChevronRight,
@@ -255,20 +256,13 @@ export function WorkspaceShell() {
             <i />
             {isDemo ? 'Demo workspace' : 'Workspace connected'}
           </span>
-          <Link
-            className="header-profile"
-            aria-label={`${data.profile.business} · Your profile`}
-            to="/app/profile"
-          >
-            <span className="header-profile-business">{data.profile.business}</span>
-            <span className="avatar">
-              {data.profile.name
-                .split(' ')
-                .map((n) => n[0])
-                .slice(0, 2)
-                .join('')}
-            </span>
-          </Link>
+          <AccountMenu
+            profile={data.profile}
+            onSignOut={() => {
+              logout();
+              navigate('/login');
+            }}
+          />
         </div>
       </header>
       <div className="workspace-body">
@@ -329,7 +323,9 @@ export function WorkspaceShell() {
                 onClick={() => setDrawer(false)}
               >
                 <div className="recent-payment-top">
-                  <span className="payment-currency-mark">{p.currency === 'USD' ? '$' : '₦'}</span>
+                  <span className="payment-currency-mark">
+                    {{ USD: '$', NGN: '₦', EUR: '€', USDC: '◉' }[p.currency]}
+                  </span>
                   <strong>{money(p.amountMinor, p.currency)}</strong>
                   <ChevronRight className="payment-open" size={13} />
                 </div>

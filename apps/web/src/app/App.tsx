@@ -17,7 +17,8 @@ const LinkDetails = lazy(() => import('../features/payments/LinkDetails'));
 const PaymentDetails = lazy(() => import('../features/payments/PaymentDetails'));
 const TrackDelivery = lazy(() => import('../features/deliveries/TrackDelivery'));
 const Agent = lazy(() => import('../features/agent/Agent'));
-const Catalogue = lazy(() => import('../features/catalogue/Catalogue'));
+const Catalogue = lazy(() => import('../features/catalogue/ProductManager'));
+const Storefront = lazy(() => import('../features/store/Storefront'));
 const Payments = lazy(() => import('../features/payments/Payments'));
 const Links = lazy(() => import('../features/payments/PaymentLinks'));
 const Deliveries = lazy(() => import('../features/deliveries/Deliveries'));
@@ -165,6 +166,14 @@ const router = createBrowserRouter([
     element: (
       <Root>
         <Checkout />
+      </Root>
+    ),
+  },
+  {
+    path: '/store/demo',
+    element: (
+      <Root>
+        <Storefront />
       </Root>
     ),
   },

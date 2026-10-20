@@ -47,7 +47,8 @@ export default function PaymentLinks() {
                 </div>
                 <div className="amount-column">
                   <strong>
-                    {money(l.amountMinor, l.currency)} <small>{l.currency}</small>
+                    {money(l.amountMinor, l.currency)}{' '}
+                    {l.currency !== 'USDC' && <small>{l.currency}</small>}
                   </strong>
                   <Status
                     value={

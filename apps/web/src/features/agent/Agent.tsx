@@ -48,7 +48,8 @@ function PaymentLinkConfirmation({ id, link }: { id: string; link?: PaymentLink 
         <h3>{link?.title || 'Your payment link is ready.'}</h3>
         {link && (
           <strong className="chat-link-amount">
-            {money(link.amountMinor, link.currency)} <small>{link.currency}</small>
+            {money(link.amountMinor, link.currency)}{' '}
+            {link.currency !== 'USDC' && <small>{link.currency}</small>}
           </strong>
         )}
         <p>{link?.customer ? `For ${link.customer}` : 'One link. A simpler way to get paid.'}</p>

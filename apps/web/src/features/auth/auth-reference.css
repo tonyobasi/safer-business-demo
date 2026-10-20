@@ -245,7 +245,9 @@
 }
 @media (max-width: 700px) {
   .auth-layout {
-    background: radial-gradient(ellipse at 0% 0%, #e7f5b3 0%, transparent 65%), #fafaf7;
+    background:
+      radial-gradient(ellipse 480px 360px at 0% 0%, #f0f5dd 0%, #f6f8ed 45%, transparent 100%),
+      #fafaf7;
   }
   .auth-layout .auth-right {
     padding: 24px 20px;

@@ -25,6 +25,10 @@ describe('money contracts', () => {
       expires: '30',
     };
     expect(linkSchema.safeParse(v).success).toBe(false);
-    expect(linkSchema.safeParse({ ...v, amount: '120', currency: 'EUR' }).success).toBe(false);
+    expect(linkSchema.safeParse({ ...v, amount: '120', currency: 'JPY' }).success).toBe(false);
   });
+});
+it('formats euro and USDC invoices without naira symbols', () => {
+  expect(money('12009', 'EUR')).toBe('€120.09');
+  expect(money('12009', 'USDC')).toBe('120.09 USDC');
 });

@@ -14,6 +14,8 @@ export function seed(): Workspace {
     balances: {
       USD: { available: '428000', pending: '32000' },
       NGN: { available: '128450000', pending: '8500000' },
+      EUR: { available: '0', pending: '0' },
+      USDC: { available: '0', pending: '0' },
     },
     links: [
       {

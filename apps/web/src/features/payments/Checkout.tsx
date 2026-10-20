@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Badge, Button, CopyButton, ErrorState, Loading, Logo } from '../../components/ui';
 import { api, isDemo } from '../../lib/api';
 import { date, money } from '../../lib/money';
+import { paymentCurrency, bankPaymentLabel } from '../../lib/payment-currencies';
 export default function Checkout() {
   const { token } = useParams();
   const client = useQueryClient();
@@ -25,10 +26,10 @@ export default function Checkout() {
       api(`/payment-links/${token}/simulate`, {
         status,
         method:
-          method === 'usdc' && link && allowsStablecoin(link)
+          link && (link.currency === 'USDC' || (method === 'usdc' && allowsStablecoin(link)))
             ? 'USDC'
-            : link?.currency === 'USD'
-              ? 'US virtual account'
+            : link
+              ? bankPaymentLabel(link.currency)
               : 'Bank transfer',
       }),
     onSuccess: () => {
@@ -47,7 +48,7 @@ export default function Checkout() {
     );
   const expired = new Date(link.expiresAt).getTime() < Date.now() && link.status !== 'paid';
   const stablecoinEnabled = allowsStablecoin(link);
-  const payingWithStablecoin = stablecoinEnabled && method === 'usdc';
+  const payingWithStablecoin = link.currency === 'USDC' || (stablecoinEnabled && method === 'usdc');
   return (
     <div className="checkout-page modern-checkout">
       <Logo />
@@ -121,15 +122,16 @@ export default function Checkout() {
               <div className="checkout-summary-caption">
                 <Badge>Payment request</Badge>
                 <img
-                  src={`/images/flags/${link.currency === 'USD' ? 'us' : 'ng'}.svg`}
-                  alt={`${link.currency} flag`}
+                  src={paymentCurrency(link.currency).image}
+                  alt={link.currency === 'USDC' ? 'USDC logo' : `${link.currency} flag`}
                   width={28}
                   height={20}
                 />
               </div>
               <h1>{link.title}</h1>
               <h2 className="checkout-amount">
-                {money(link.amountMinor, link.currency)} <small>{link.currency}</small>
+                {money(link.amountMinor, link.currency)}{' '}
+                {link.currency !== 'USDC' && <small>{link.currency}</small>}
               </h2>
               <p>
                 {link.customer
@@ -137,14 +139,14 @@ export default function Checkout() {
                   : 'Pay securely without creating an account.'}
               </p>
             </div>
-            {stablecoinEnabled && (
+            {stablecoinEnabled && link.currency !== 'USDC' && (
               <div className="segmented">
                 <button
                   aria-pressed={method === 'bank'}
                   className={method === 'bank' ? 'selected' : ''}
                   onClick={() => setMethod('bank')}
                 >
-                  {link.currency === 'USD' ? 'US virtual account' : 'Bank transfer'}
+                  {bankPaymentLabel(link.currency)}
                 </button>
                 <button
                   aria-pressed={method === 'usdc'}
@@ -163,10 +165,11 @@ export default function Checkout() {
                     A supported network and receiving address will be supplied by the live payment
                     provider.
                   </p>
-                  {link.currency === 'NGN' && (
+                  {link.currency !== 'USD' && link.currency !== 'USDC' && (
                     <p className="stablecoin-conversion-note">
-                      Your invoice is in NGN. The live provider will quote the USDC amount and
-                      conversion rate before payment. No conversion is calculated in this demo.
+                      Your invoice is in {link.currency}. The live provider will quote the USDC
+                      amount and conversion rate before payment. No conversion is calculated in this
+                      demo.
                     </p>
                   )}
                   <div className="notice">Demo address only · Do not send crypto.</div>
@@ -179,9 +182,7 @@ export default function Checkout() {
                 </>
               ) : (
                 <>
-                  <strong>
-                    {link.currency === 'USD' ? 'US virtual account' : 'Naira bank transfer'}
-                  </strong>
+                  <strong>{bankPaymentLabel(link.currency)}</strong>
                   <div className="detail-rows">
                     <div>
                       <span>Bank</span>
@@ -192,8 +193,8 @@ export default function Checkout() {
                       <strong>Safer Business Demo</strong>
                     </div>
                     <div>
-                      <span>Account number</span>
-                      <strong>DEMO ACCOUNT</strong>
+                      <span>{link.currency === 'EUR' ? 'IBAN' : 'Account number'}</span>
+                      <strong>{link.currency === 'EUR' ? 'DEMO IBAN' : 'DEMO ACCOUNT'}</strong>
                     </div>
                     <div>
                       <span>Transfer amount</span>

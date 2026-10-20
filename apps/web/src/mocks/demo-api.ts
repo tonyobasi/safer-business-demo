@@ -1,8 +1,20 @@
-import type { DeliveryInput, ItemInput, LinkInput, Preferences, Profile } from '@safer/contracts';
+import type {
+  ProductInput,
+  DeliveryInput,
+  ItemInput,
+  LinkInput,
+  Preferences,
+  Profile,
+} from '@safer/contracts';
 import { repo } from './repository';
 
 /** Browser-local demo transport. Never sends a financial action to a live API. */
 export function demoApi(path: string, body: unknown, method: string, idempotency: string): unknown {
+  if (method === 'GET' && path === '/storefront') return repo.storefront();
+  if (method === 'POST' && path === '/products') return repo.saveProduct(body as ProductInput);
+  const product = path.match(/^\/products\/([^/]+)$/);
+  if (method === 'PUT' && product)
+    return repo.saveProduct(body as ProductInput, decodeURIComponent(product[1]));
   if (method === 'GET' && path === '/workspace') return repo.read();
   if (method === 'POST' && path === '/payment-links')
     return repo.createLink(body as LinkInput, idempotency);

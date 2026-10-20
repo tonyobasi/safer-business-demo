@@ -1,4 +1,6 @@
 import {
+  productSchema,
+  type ProductInput,
   deliverySchema,
   allowsStablecoin,
   itemSchema,
@@ -12,6 +14,7 @@ import {
   type Workspace,
 } from '@safer/contracts';
 import { toMinor } from '../lib/money';
+import { categoriesFor } from '../features/catalogue/categories';
 import { seed } from './seed';
 const key = 'safer-demo-workspace-v1';
 const processed = new Map<string, unknown>();
@@ -27,7 +30,10 @@ let memory: Workspace;
 function load(): Workspace {
   try {
     const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : seed();
+    if (!saved) return seed();
+    const workspace = JSON.parse(saved) as Workspace;
+    workspace.balances = { ...seed().balances, ...workspace.balances };
+    return workspace;
   } catch {
     return seed();
   }
@@ -69,7 +75,7 @@ export const repo = {
       createdAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + Number(v.expires) * 86400000).toISOString(),
       status: 'pending',
-      allowStablecoin: v.allowStablecoin ?? false,
+      allowStablecoin: v.currency === 'USDC' || (v.allowStablecoin ?? false),
     };
     data().links.unshift(l);
     processed.set(idempotency, l);
@@ -131,6 +137,67 @@ export const repo = {
     save('inventory.updated', item.id);
     return item;
   },
+  saveProduct: (input: ProductInput, id?: string) => {
+    const v = productSchema.parse(input);
+    const taxonomy = categoriesFor(v.businessType);
+    if (!taxonomy[v.category]?.includes(v.subcategory))
+      throw new DomainError(
+        'CATEGORY',
+        'Choose a category and subcategory for this business type.',
+      );
+    if (data().items.some((i) => i.id !== id && i.sku.toLowerCase() === v.sku.toLowerCase()))
+      throw new DomainError('DUPLICATE_SKU', 'An item with this SKU already exists.');
+    const existing = id ? data().items.find((i) => i.id === id) : undefined;
+    if (id && !existing) throw new DomainError('NOT_FOUND', 'Product not found.');
+    const product = {
+      ...existing,
+      id: existing?.id ?? crypto.randomUUID(),
+      name: v.name,
+      sku: v.sku,
+      category: v.category,
+      subcategory: v.subcategory,
+      businessType: v.businessType,
+      description: v.description,
+      images: v.images,
+      image: v.images[0] ?? '',
+      visibility: v.visibility,
+      amountMinor: toMinor(v.amount),
+      currency: v.currency,
+      sold: existing?.sold ?? 0,
+      remaining: existing?.remaining ?? v.quantity,
+    };
+    const previous = [...data().items];
+    data().items = existing
+      ? data().items.map((i) => (i.id === id ? product : i))
+      : [product, ...data().items];
+    try {
+      save('inventory.updated', product.id);
+    } catch {
+      data().items = previous;
+      throw new DomainError(
+        'STORAGE',
+        'Device storage is full. Remove an image or use smaller images and try again.',
+      );
+    }
+    return structuredClone(product);
+  },
+  storefront: () => ({
+    business: data().profile.business,
+    category: data().profile.category,
+    products: data()
+      .items.filter((i) => i.visibility === 'published')
+      .map((i) => ({
+        id: i.id,
+        name: i.name,
+        description: i.description ?? '',
+        category: i.category,
+        subcategory: i.subcategory ?? '',
+        amountMinor: i.amountMinor,
+        currency: i.currency,
+        images: i.images ?? (i.image ? [i.image] : []),
+        available: i.remaining > 0,
+      })),
+  }),
   stock: (id: string, quantity: number, kind: 'sale' | 'restock', idempotency: string) => {
     if (processed.has(idempotency)) return;
     const item = data().items.find((x) => x.id === id);

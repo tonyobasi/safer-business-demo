@@ -31,6 +31,7 @@ export function AuthLayout({
   step?: number;
   compact?: boolean;
 }) {
+  const isLogin = useLocation().pathname === '/login';
   return (
     <div className={`auth-layout${compact ? ' auth-layout-signin' : ''}`}>
       <aside className="auth-story">
@@ -66,7 +67,10 @@ export function AuthLayout({
         <header>
           <Logo />
           <span>
-            Already have an account? <Link to="/login">Sign in</Link>
+            {isLogin ? 'New to Safer Business? ' : 'Already have an account? '}
+            <Link className="auth-switch-link" to={isLogin ? '/signup' : '/login'}>
+              {isLogin ? 'Sign up' : 'Sign in'}
+            </Link>
           </span>
         </header>
         <main className={`auth-form-wrap${compact ? ' auth-form-wrap-compact' : ''}`}>
@@ -520,8 +524,8 @@ export function Login() {
           </p>
         )}
         <Button className="full-width">Sign in</Button>
-        <p className="auth-caption">
-          New here? <Link to="/signup">Create a merchant account</Link>
+        <p className="auth-caption auth-signup-prompt">
+          Don’t have an account? <Link to="/signup">Sign up</Link>
         </p>
         <div className="notice">Demo access only. No real credentials are checked or stored.</div>
       </form>

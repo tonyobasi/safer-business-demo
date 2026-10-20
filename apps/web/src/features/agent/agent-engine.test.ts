@@ -23,3 +23,13 @@ describe('demo agent interpretation', () => {
     expect(prepareResponse('Connect me to a rider').card).toBe('delivery');
   });
 });
+it('recognizes euro and USDC payment link requests', () => {
+  expect(prepareResponse('Create a payment link for EUR 25')).toMatchObject({
+    currency: 'EUR',
+    amount: '25',
+  });
+  expect(prepareResponse('Create a payment link for 30 USDC')).toMatchObject({
+    currency: 'USDC',
+    amount: '30',
+  });
+});

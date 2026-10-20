@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useId } from 'react';
 import { Button } from '../../components/ui';
 import { api } from '../../lib/api';
+import { paymentCurrencies } from '../../lib/payment-currencies';
 export function PaymentLinkForm({
   onCreated,
   currency = 'NGN',
@@ -19,6 +20,7 @@ export function PaymentLinkForm({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<LinkInput>({
     resolver: zodResolver(linkSchema),
@@ -32,6 +34,7 @@ export function PaymentLinkForm({
       allowStablecoin: false,
     },
   });
+  const selectedCurrency = watch('currency');
   const mutation = useMutation({
     mutationFn: (v: LinkInput) => api<PaymentLink>('/payment-links', v),
     onSuccess: (l) => {
@@ -41,14 +44,22 @@ export function PaymentLinkForm({
   });
   return (
     <form onSubmit={handleSubmit((v) => mutation.mutate(v))} className="stack-form">
-      <div className="form-row">
-        <label>
-          Currency
-          <select {...register('currency')}>
-            <option value="NGN">NGN · Nigerian naira</option>
-            <option value="USD">USD · US dollar</option>
-          </select>
-        </label>
+      <fieldset className="payment-currency-fieldset">
+        <legend>Payment currency</legend>
+        <div className="payment-currency-grid">
+          {paymentCurrencies.map((option) => (
+            <label className="payment-currency-choice" key={option.code}>
+              <input type="radio" value={option.code} {...register('currency')} />
+              <img src={option.image} alt="" width={28} height={20} />
+              <span>
+                <strong>{option.code}</strong>
+                <small>{option.name}</small>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <div>
         <label>
           Amount
           <input
@@ -88,23 +99,29 @@ export function PaymentLinkForm({
           <option value="90">90 days</option>
         </select>
       </label>
-      <label className="payment-link-stablecoin">
-        <input
-          type="checkbox"
-          {...register('allowStablecoin')}
-          aria-describedby={stablecoinDescription}
-        />
-        <span>
-          <strong>Allow stablecoin payments</strong>
-          <small id={stablecoinDescription}>
-            Let customers pay with USDC alongside bank transfer. Conversion and network details are
-            provided at checkout by the live payment provider.
-          </small>
-        </span>
-        <span className="stablecoin-token" aria-hidden="true">
-          USDC
-        </span>
-      </label>
+      {selectedCurrency === 'USDC' ? (
+        <div className="notice">
+          This link accepts USDC. Customers will see stablecoin payment instructions at checkout.
+        </div>
+      ) : (
+        <label className="payment-link-stablecoin">
+          <input
+            type="checkbox"
+            {...register('allowStablecoin')}
+            aria-describedby={stablecoinDescription}
+          />
+          <span>
+            <strong>Allow stablecoin payments</strong>
+            <small id={stablecoinDescription}>
+              Let customers pay with USDC alongside bank transfer. Conversion and network details
+              are provided at checkout by the live payment provider.
+            </small>
+          </span>
+          <span className="stablecoin-token" aria-hidden="true">
+            USDC
+          </span>
+        </label>
+      )}
       <p className="muted small-text">
         Review the amount, currency and payment options before creating your link.
       </p>

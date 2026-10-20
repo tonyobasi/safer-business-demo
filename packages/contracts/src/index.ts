@@ -1,5 +1,5 @@
 import { z } from 'zod';
-export type Currency = 'USD' | 'NGN';
+export type Currency = 'USD' | 'NGN' | 'EUR' | 'USDC';
 export interface Money {
   asset: Currency | 'USDC';
   amountMinor: string;
@@ -14,7 +14,7 @@ export const linkSchema = z.object({
       (v) => amountPattern.test(v) && Number(v) > 0,
       'Enter a positive amount with up to 2 decimals.',
     ),
-  currency: z.enum(['USD', 'NGN']),
+  currency: z.enum(['USD', 'NGN', 'EUR', 'USDC']),
   customer: z.string().trim().max(100),
   email: z.union([z.literal(''), z.email('Enter a valid email.')]),
   expires: z.enum(['7', '30', '90']),
@@ -36,7 +36,7 @@ export interface PaymentLink {
 }
 // Existing USD links offered USDC before this preference was introduced.
 export const allowsStablecoin = (link: PaymentLink) =>
-  link.allowStablecoin ?? link.currency === 'USD';
+  link.currency === 'USDC' || (link.allowStablecoin ?? link.currency === 'USD');
 export interface Payment {
   id: string;
   linkId?: string;
@@ -58,6 +58,11 @@ export interface Item {
   amountMinor: string;
   currency: Currency;
   image: string;
+  images?: string[];
+  description?: string;
+  subcategory?: string;
+  businessType?: string;
+  visibility?: 'draft' | 'published';
 }
 export interface Delivery {
   id: string;
@@ -134,9 +139,41 @@ export interface ChatMessage {
 export const itemSchema = z.object({
   name: z.string().trim().min(3, 'Enter an item name.').max(100),
   sku: z.string().trim().min(3, 'Enter a unique SKU.').max(32),
-  category: z.enum(['Clothing', 'Accessories', 'Other']),
+  category: z.string().trim().min(1).max(80),
   quantity: z.coerce.number().int().min(0).max(100000),
   amount: z.string().refine((v) => amountPattern.test(v), 'Enter a valid price.'),
   currency: z.enum(['NGN', 'USD']),
 });
 export type ItemInput = z.infer<typeof itemSchema>;
+
+export const productSchema = itemSchema
+  .extend({
+    description: z.string().trim().max(2000),
+    subcategory: z.string().trim().min(1, 'Choose a subcategory.').max(80),
+    businessType: z.string().trim().min(1).max(80),
+    images: z
+      .array(
+        z
+          .string()
+          .max(600000)
+          .regex(
+            /^(?:data:image\/(?:jpeg|png|webp);base64,|\/images\/[a-zA-Z0-9_/-]+\.(?:jpg|jpeg|png|webp)$)/,
+            'Upload a supported image.',
+          ),
+      )
+      .max(4),
+    visibility: z.enum(['draft', 'published']),
+    currency: z.enum(['NGN', 'USD', 'EUR', 'USDC']),
+  })
+  .superRefine((v, ctx) => {
+    if (
+      v.visibility === 'published' &&
+      (!v.images.length || v.description.length < 10 || Number(v.amount) <= 0)
+    )
+      ctx.addIssue({
+        code: 'custom',
+        message:
+          'Published products need an image, a description of at least 10 characters, and a positive price.',
+      });
+  });
+export type ProductInput = z.infer<typeof productSchema>;

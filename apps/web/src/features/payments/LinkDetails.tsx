@@ -4,6 +4,7 @@ import { allowsStablecoin } from '@safer/contracts';
 import { CopyButton, ErrorState, Loading, PageHeading, Status } from '../../components/ui';
 import { useWorkspace } from '../../lib/api';
 import { date, money } from '../../lib/money';
+import { bankPaymentLabel } from '../../lib/payment-currencies';
 export default function LinkDetails() {
   const { id } = useParams();
   const { data, isPending } = useWorkspace();
@@ -33,7 +34,8 @@ export default function LinkDetails() {
           </span>
           <p>{l.title}</p>
           <h2>
-            {money(l.amountMinor, l.currency)} <small>{l.currency}</small>
+            {money(l.amountMinor, l.currency)}{' '}
+            {l.currency !== 'USDC' && <small>{l.currency}</small>}
           </h2>
           <span className="payment-link-summary-caption">Payment request</span>
         </header>
@@ -54,8 +56,8 @@ export default function LinkDetails() {
             <div>
               <span>Payment options</span>
               <strong>
-                {l.currency === 'USD' ? 'US virtual account' : 'NGN bank transfer'}
-                {allowsStablecoin(l) ? ' · USDC' : ''}
+                {l.currency === 'USDC' ? 'USDC stablecoin' : bankPaymentLabel(l.currency)}
+                {l.currency !== 'USDC' && allowsStablecoin(l) ? ' · USDC' : ''}
               </strong>
             </div>
           </div>

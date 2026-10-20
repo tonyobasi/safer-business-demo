@@ -8,8 +8,8 @@ export function money(value: string, currency: Currency | 'EUR' | 'GBP') {
   const minor = BigInt(value);
   const sign = minor < 0n ? '-' : '';
   const abs = minor < 0n ? -minor : minor;
-  const symbol = { USD: '$', NGN: '₦', EUR: '€', GBP: '£' }[currency];
-  return `${sign}${symbol}${(abs / 100n).toLocaleString('en-US')}.${(abs % 100n).toString().padStart(2, '0')}`;
+  const symbol = { USD: '$', NGN: '₦', EUR: '€', GBP: '£', USDC: '' }[currency];
+  return `${sign}${symbol}${(abs / 100n).toLocaleString('en-US')}.${(abs % 100n).toString().padStart(2, '0')}${currency === 'USDC' ? ' USDC' : ''}`;
 }
 export function date(value: string) {
   return new Intl.DateTimeFormat('en-NG', {
