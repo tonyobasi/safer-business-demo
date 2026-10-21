@@ -1,6 +1,16 @@
 import type { Profile, Workspace } from '@safer/contracts';
 import { useQueryClient } from '@tanstack/react-query';
-import { Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import {
+  ArrowRight,
+  ChartNoAxesCombined,
+  Eye,
+  EyeOff,
+  Link2,
+  LockKeyhole,
+  Mail,
+  Package,
+  ShieldCheck,
+} from 'lucide-react';
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useSession } from '../../app/session';
@@ -32,6 +42,48 @@ export function AuthLayout({
   compact?: boolean;
 }) {
   const isLogin = useLocation().pathname === '/login';
+  if (isLogin)
+    return (
+      <div className="signin-console">
+        <aside className="signin-story">
+          <header className="signin-brand-row">
+            <Logo to="/" light />
+            <span className="signin-workspace-tag">
+              <i /> MERCHANT WORKSPACE
+            </span>
+          </header>
+          <div className="signin-story-copy">
+            <h1>
+              Your business,
+              <br />
+              <span>under control.</span>
+            </h1>
+            <p>Payments, products, people. One connected workspace to keep your business moving.</p>
+          </div>
+          <ul className="signin-feature-list">
+            <li>
+              <Link2 size={20} />
+              <strong>Get paid</strong>
+              <span>One link. More possibility.</span>
+            </li>
+            <li>
+              <Package size={20} />
+              <strong>Stay stocked</strong>
+              <span>Your products, organised.</span>
+            </li>
+            <li>
+              <ChartNoAxesCombined size={20} />
+              <strong>Keep growing</strong>
+              <span>More clarity. Less admin.</span>
+            </li>
+          </ul>
+        </aside>
+        <main className="signin-panel">
+          <div className="signin-card">{children}</div>
+          <footer>© {new Date().getFullYear()} Safer Business</footer>
+        </main>
+      </div>
+    );
   return (
     <div className={`auth-layout${compact ? ' auth-layout-signin' : ''}`}>
       <aside className="auth-story">
@@ -457,6 +509,7 @@ export function Login() {
   const location = useLocation();
   const [params] = useSearchParams();
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   function demo() {
     login('demo@safer.example');
     const next = params.get('next');
@@ -472,11 +525,14 @@ export function Login() {
   }
   return (
     <AuthLayout compact>
-      <p className="eyebrow">Good to have you back</p>
-      <h2>Your business awaits.</h2>
-      <p>Sign in to pick up where you left off.</p>
+      <p className="eyebrow">Merchant workspace</p>
+      <h2>Sign in</h2>
+      <p>Welcome back. Let’s get your business moving.</p>
       <Button type="button" className="full-width auth-demo-entry" onClick={demo}>
-        Login to demo
+        <span>Login to demo</span>
+        <span className="signin-button-arrow">
+          <ArrowRight size={21} />
+        </span>
       </Button>
       <div className="auth-or">
         <span />
@@ -498,22 +554,38 @@ export function Login() {
       >
         <label>
           Email or phone number
-          <input
-            name="contact"
-            autoComplete="username"
-            required
-            placeholder="you@yourbusiness.com"
-          />
+          <span className="signin-input">
+            <Mail size={18} aria-hidden="true" />
+            <input
+              name="contact"
+              autoComplete="username"
+              required
+              placeholder="you@yourbusiness.com"
+            />
+          </span>
         </label>
         <label>
           Password
-          <input
-            type="password"
-            name="password"
-            autoComplete="current-password"
-            required
-            minLength={8}
-          />
+          <span className="signin-input">
+            <LockKeyhole size={18} aria-hidden="true" />
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              autoComplete="current-password"
+              required
+              minLength={8}
+              placeholder="Enter your password"
+            />
+            <button
+              type="button"
+              className="signin-password-toggle"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              aria-pressed={showPassword}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </span>
         </label>
         <Link className="subtle-link right" to="/password/reset">
           Forgot password?

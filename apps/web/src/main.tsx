@@ -2,6 +2,9 @@ import '@fontsource-variable/outfit';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/inter/latin-800.css';
+import '@fontsource/inter/latin-900.css';
 import '@fontsource/kanit/latin-400.css';
 import '@fontsource/kanit/latin-500.css';
 import '@fontsource/kanit/latin-600.css';
@@ -12,6 +15,7 @@ import App, { queryClient } from './app/App';
 import './styles/global.css';
 import './features/auth/auth-reference.css';
 import './styles/theme.css';
+import './features/auth/signin-console.css';
 async function start() {
   if (import.meta.env.VITE_DEMO_MODE !== 'false') {
     const { events } = await import('./mocks/repository');

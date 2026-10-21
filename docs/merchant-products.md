@@ -1,8 +1,8 @@
-# Products and archived storefront demo
+# Archived products and storefront demo
 
-The visitor storefront was archived on 20 October 2026. Its route, visitor entry button and demo transport endpoint are disabled. Product management, saved data and publication settings remain intact. `apps/web/src/features/store/Storefront.tsx` and its styles are retained for restoration. The visitor behaviour described below documents the archived feature.
+The visitor storefront was archived on 20 October 2026. On 21 October 2026 the new product manager, product details and image-upload screens were also removed from the active app, restoring the original private stock catalogue. Their source is retained for recovery; no merchant data is erased. Its route, visitor entry button and demo transport endpoint are disabled. Product management, saved data and publication settings remain intact. `apps/web/src/features/store/Storefront.tsx` and its styles are retained for restoration. The visitor behaviour described below documents the archived feature.
 
-Open `/app/catalogue` to manage products. Add or edit a product with up to four images, title, description, price/currency, SKU, business type, category, subcategory and opening stock. The first image is the cover; additional images can be promoted to cover or removed. Stock movements continue to record sales and restocks independently of payments.
+The archived product manager previously used `/app/catalogue`. That route now opens the original private stock catalogue. Add or edit a product with up to four images, title, description, price/currency, SKU, business type, category, subcategory and opening stock. The first image is the cover; additional images can be promoted to cover or removed. Stock movements continue to record sales and restocks independently of payments.
 
 Categories depend on business type: fashion/accessories, electronics, food/hospitality, retail, professional services or other. Changing type resets the category and subcategory together. Editing details preserves sales and current stock.
 

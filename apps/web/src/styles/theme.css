@@ -134,6 +134,15 @@ h4 {
 :root .balance-card .balance-caption {
   font-size: 11px;
 }
+:root .payments-page .balance-horizontal > .create-wallet-button {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+:root .payments-page .balance-horizontal > .create-wallet-button:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
 :root .business-sidebar .create-wallet-button {
   border-color: #e2e2d9;
   background: #fff;
@@ -263,6 +272,10 @@ h4 {
 }
 :root .agent-page .composer textarea:focus-visible {
   outline: none;
+}
+:root .agent-page .composer textarea::placeholder {
+  font-weight: 700;
+  color: #68717d;
 }
 :root .toolbar input,
 :root .toolbar select,
@@ -424,13 +437,13 @@ h4 {
   box-shadow: none;
 }
 :root .wallet-currency-option.selected {
-  background: #cdf140;
-  border-color: #b6d62a;
-  color: #0a0a0a;
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: #fff;
   box-shadow: none;
 }
 :root .wallet-currency-option.selected small {
-  color: #4b5429;
+  color: #fff;
 }
 :root .notice,
 :root .delivery-booking-form > p.small-text {
@@ -856,8 +869,8 @@ h4 {
     line-height: 1.5;
   }
   :root .agent-page .composer textarea::placeholder {
-    font-weight: 500;
-    color: #787f89;
+    font-weight: 700;
+    color: #68717d;
   }
   :root .agent-page .agent-card h3 {
     font-size: 21px;
@@ -1210,4 +1223,37 @@ h4 {
   outline: 2px solid #8ba51e;
   outline-offset: -2px;
   background: #f0f6dc;
+}
+
+.receipt-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.receipt-actions > button:first-child {
+  width: 100%;
+}
+:root .receipt-actions .receipt-print-text {
+  padding: 6px 12px;
+  min-height: 36px;
+  border: 0;
+  background: transparent;
+  color: #69705e;
+  font: 650 13px var(--body);
+  text-decoration: none;
+  cursor: pointer;
+}
+.receipt-print-text:hover {
+  color: #0a0a0a;
+}
+.receipt-print-text:focus-visible {
+  outline: 2px solid #8ba51e;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+@media print {
+  .receipt-actions {
+    display: none;
+  }
 }

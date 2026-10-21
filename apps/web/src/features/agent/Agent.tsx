@@ -160,12 +160,10 @@ export default function Agent() {
             <div className="welcome-mark">
               <Sparkles size={24} />
             </div>
-            <p className="eyebrow">A little more possible</p>
             <h1>
               Good morning, {data?.profile.name.split(' ')[0]}. What would you like to do for your
               business today?
             </h1>
-            <p>Less admin, more possibility. Let’s get to work.</p>
             <div className="prompt-grid">
               {prompts.map((p) => (
                 <button key={p.text} className="prompt-card" onClick={() => send(p.text)}>
@@ -325,7 +323,7 @@ export default function Agent() {
           <textarea
             ref={input}
             aria-label="Message your business assistant"
-            placeholder="Ask about payments, stock, or deliveries…"
+            placeholder="Ask about payments, stock, or deliveries"
             value={text}
             onChange={(e) => setText(e.target.value)}
             maxLength={2000}

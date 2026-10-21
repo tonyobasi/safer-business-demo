@@ -1,8 +1,9 @@
 import { CircleCheck, ReceiptText } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, ErrorState, Loading, PageHeading, Status } from '../../components/ui';
+import { ErrorState, Loading, PageHeading, Status } from '../../components/ui';
 import { useWorkspace } from '../../lib/api';
 import { date, money } from '../../lib/money';
+import ReceiptActions from './ReceiptActions';
 export default function PaymentDetails() {
   const { id } = useParams();
   const { data, isPending } = useWorkspace();
@@ -73,7 +74,7 @@ export default function PaymentDetails() {
               </div>
             ))}
           </dl>
-          <Button onClick={() => window.print()}>Print receipt</Button>
+          <ReceiptActions payment={p} business={data?.profile.business || 'Safer Business'} />
           <p className="receipt-demo-note">
             Illustrative demo payment · No real funds transferred.
           </p>
